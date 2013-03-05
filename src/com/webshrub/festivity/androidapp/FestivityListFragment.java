@@ -5,7 +5,6 @@ import android.support.v4.widget.SearchViewCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.Menu;
@@ -18,7 +17,9 @@ import com.actionbarsherlock.view.MenuItem;
  * Date: 2/28/13
  * Time: 1:38 PM
  */
-public class FestivityListFragment extends SherlockListFragment {
+public class FestivityListFragment<T> extends SherlockListFragment {
+    protected T[] data;
+    protected int resourceLayoutId;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class FestivityListFragment extends SherlockListFragment {
         // We have a menu item to show in action bar.
         setHasOptionsMenu(true);
         getListView().setTextFilterEnabled(true);
-        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, Shakespeare.TITLES));
+        setListAdapter(new FestivityListAdapter<T>(getActivity(), resourceLayoutId, data));
     }
 
     @Override
