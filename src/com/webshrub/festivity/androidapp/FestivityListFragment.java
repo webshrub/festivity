@@ -39,26 +39,23 @@ public class FestivityListFragment<T> extends SherlockListFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // Place an action bar item for searching.
-        MenuItem item = menu.add("Search");
-        item.setIcon(android.R.drawable.ic_menu_search);
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        View searchView = SearchViewCompat.newSearchView(getActivity());
-        if (searchView != null) {
-            SearchViewCompat.setOnQueryTextListener(searchView,
-                    new SearchViewCompat.OnQueryTextListenerCompat() {
-                        @Override
-                        public boolean onQueryTextChange(String newText) {
-                            // Called when the action bar search text has changed.  Update the search filter, and restart the loader to do a new query with this filter.
-                            if (TextUtils.isEmpty(newText)) {
-                                getListView().clearTextFilter();
-                            } else {
-                                getListView().setFilterText(newText);
-                            }
-                            return true;
-                        }
-                    });
-            item.setActionView(searchView);
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.menu_search);
+        View searchView = searchItem.getActionView();
+        SearchViewCompat.setOnQueryTextListener(searchView, new FestivityOnQueryTextListenerCompat());
+    }
+
+    private class FestivityOnQueryTextListenerCompat extends SearchViewCompat.OnQueryTextListenerCompat {
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            // Called when the action bar search text has changed.  Update the search filter, and restart the loader to do a new query with this filter.
+            if (TextUtils.isEmpty(newText)) {
+                getListView().clearTextFilter();
+            } else {
+                getListView().setFilterText(newText);
+            }
+            return true;
         }
     }
 }
