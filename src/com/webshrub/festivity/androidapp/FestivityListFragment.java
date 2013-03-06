@@ -6,11 +6,14 @@ import android.support.v4.widget.SearchViewCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+
+import java.lang.reflect.Field;
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,8 +54,20 @@ public class FestivityListFragment<T> extends SherlockListFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_settings:
-                Intent intent = new Intent(getActivity(), FestivityPreferenceActivity.class);
-                startActivity(intent);
+                Intent preferenceIntent = new Intent(getActivity(), FestivityPreferenceActivity.class);
+                startActivity(preferenceIntent);
+                return true;
+            case R.id.menu_share_on_facebook:
+                Intent facebookIntent = new Intent(getActivity(), FestivityPreferenceActivity.class);
+                startActivity(facebookIntent);
+                return true;
+            case R.id.menu_share_on_twitter:
+                Intent twitterIntent = new Intent(getActivity(), FestivityPreferenceActivity.class);
+                startActivity(twitterIntent);
+                return true;
+            case R.id.menu_rate_us:
+                Intent rateUsIntent = new Intent(getActivity(), FestivityPreferenceActivity.class);
+                startActivity(rateUsIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
