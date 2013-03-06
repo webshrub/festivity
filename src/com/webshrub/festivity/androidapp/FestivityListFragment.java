@@ -1,5 +1,6 @@
 package com.webshrub.festivity.androidapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SearchViewCompat;
 import android.text.TextUtils;
@@ -44,6 +45,18 @@ public class FestivityListFragment<T> extends SherlockListFragment {
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         View searchView = searchItem.getActionView();
         SearchViewCompat.setOnQueryTextListener(searchView, new FestivityOnQueryTextListenerCompat());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_settings:
+                Intent intent = new Intent(getActivity(), FestivityPreferenceActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private class FestivityOnQueryTextListenerCompat extends SearchViewCompat.OnQueryTextListenerCompat {

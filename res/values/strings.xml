@@ -40,4 +40,5 @@
             <i>World!</i>
         </b>
     </string>
+    <string name="preferences">Settings</string>
 </resources>
