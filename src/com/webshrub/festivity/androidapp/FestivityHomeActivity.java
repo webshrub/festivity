@@ -183,25 +183,16 @@ public class FestivityHomeActivity extends SherlockFragmentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menu_rate_us:
+                return true;
+            case R.id.menu_share_on_facebook:
+                return true;
+            case R.id.menu_share_on_twitter:
+                return true;
             case R.id.menu_settings:
                 Intent preferenceIntent = new Intent(this, FestivityPreferenceActivity.class);
                 preferenceIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(preferenceIntent);
-                return true;
-            case R.id.menu_share_on_facebook:
-                Intent facebookIntent = new Intent(this, FestivityPreferenceActivity.class);
-                facebookIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(facebookIntent);
-                return true;
-            case R.id.menu_share_on_twitter:
-                Intent twitterIntent = new Intent(this, FestivityPreferenceActivity.class);
-                twitterIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(twitterIntent);
-                return true;
-            case R.id.menu_rate_us:
-                Intent rateUsIntent = new Intent(this, FestivityPreferenceActivity.class);
-                rateUsIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(rateUsIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
