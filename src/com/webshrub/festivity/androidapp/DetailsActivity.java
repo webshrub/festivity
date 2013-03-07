@@ -29,10 +29,6 @@ public class DetailsActivity extends SherlockFragmentActivity {
 
     public static class DetailsFragment extends SherlockFragment {
 
-        public int getShownIndex() {
-            return getArguments().getInt("index", 0);
-        }
-
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             ScrollView scroller = new ScrollView(getActivity());
@@ -40,7 +36,7 @@ public class DetailsActivity extends SherlockFragmentActivity {
             int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getActivity().getResources().getDisplayMetrics());
             text.setPadding(padding, padding, padding, padding);
             scroller.addView(text);
-            text.setText(Shakespeare.DIALOGUE[getShownIndex()]);
+            text.setText(((Message) getArguments().getParcelable(FestivityListFragment.FESTIVITY_EXTRA_KEY)).getMessageText());
             return scroller;
         }
     }

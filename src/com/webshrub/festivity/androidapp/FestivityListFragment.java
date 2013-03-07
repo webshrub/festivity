@@ -2,6 +2,7 @@ package com.webshrub.festivity.androidapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.widget.SearchViewCompat;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,7 +18,8 @@ import com.actionbarsherlock.view.MenuItem;
  * Date: 2/28/13
  * Time: 1:38 PM
  */
-public class FestivityListFragment<T> extends SherlockListFragment {
+public class FestivityListFragment<T extends Parcelable> extends SherlockListFragment {
+    public static final String FESTIVITY_EXTRA_KEY = "extra";
     protected T[] data;
     protected int resourceLayoutId;
 
@@ -36,7 +38,7 @@ public class FestivityListFragment<T> extends SherlockListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         Intent intent = new Intent();
         intent.setClass(getActivity(), DetailsActivity.class);
-        intent.putExtra("index", position);
+        intent.putExtra(FESTIVITY_EXTRA_KEY, (Parcelable) getListAdapter().getItem(position));
         startActivity(intent);
     }
 

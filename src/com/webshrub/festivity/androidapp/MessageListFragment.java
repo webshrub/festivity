@@ -18,7 +18,7 @@ public class MessageListFragment extends FestivityListFragment<Message> {
         String[] titles = Shakespeare.TITLES;
         for (int i = 0, titlesLength = titles.length; i < titlesLength; i++) {
             String title = titles[i];
-            data[i] = new Message(String.valueOf(i), title, title);
+            data[i] = new Message(i, title, title);
         }
         super.onActivityCreated(savedInstanceState);
     }
