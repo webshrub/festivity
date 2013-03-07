@@ -30,13 +30,13 @@ public class FestivityListFragment<T extends FestivityItem> extends SherlockList
         setHasOptionsMenu(true);
         getListView().setTextFilterEnabled(true);
         // Populate list with our static array of titles.
-        setListAdapter(new FestivityListAdapter<T>(getActivity(), resourceLayoutId, data));
+        setListAdapter(new FestivityItemListAdapter<T>(getActivity(), resourceLayoutId, data));
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Intent intent = new Intent();
-        intent.setClass(getActivity(), FestivityDetailsActivity.class);
+        intent.setClass(getActivity(), FestivityItemDetailsActivity.class);
         intent.putExtra(FESTIVITY_EXTRA_KEY, (FestivityItem) getListAdapter().getItem(position));
         startActivity(intent);
     }

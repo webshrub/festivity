@@ -8,12 +8,12 @@ import android.os.Bundle;
  * Date: 2/28/13
  * Time: 1:38 PM
  */
-public class RingtoneListFragment extends FestivityListFragment<Ringtone> {
+public class WallpaperItemListFragment extends FestivityListFragment<WallpaperItem> {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         resourceLayoutId = android.R.layout.simple_list_item_1;
-        data = new Ringtone[]{};
+        data = new WallpaperItem[]{};
         super.onActivityCreated(savedInstanceState);
     }
 }

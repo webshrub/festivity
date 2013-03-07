@@ -9,7 +9,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 
-public class FestivityDetailsFragment<T extends FestivityItem> extends SherlockFragment {
+public class FestivityItemDetailsFragment<T extends FestivityItem> extends SherlockFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ScrollView scroller = new ScrollView(getActivity());

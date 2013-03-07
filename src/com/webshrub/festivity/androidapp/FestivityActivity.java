@@ -51,9 +51,9 @@ public class FestivityActivity extends SherlockFragmentActivity {
 
         mTabsAdapter = new TabsAdapter(this, mTabHost, mViewPager);
 
-        mTabsAdapter.addTab(mTabHost.newTabSpec("messages").setIndicator("Messages"), MessageListFragment.class, null);
-        mTabsAdapter.addTab(mTabHost.newTabSpec("ringtones").setIndicator("Ringtones"), RingtoneListFragment.class, null);
-        mTabsAdapter.addTab(mTabHost.newTabSpec("wallpapers").setIndicator("Wallpapers"), WallpaperListFragment.class, null);
+        mTabsAdapter.addTab(mTabHost.newTabSpec("messages").setIndicator("Messages"), MessageItemListFragment.class, null);
+        mTabsAdapter.addTab(mTabHost.newTabSpec("ringtones").setIndicator("Ringtones"), RingtoneItemListFragment.class, null);
+        mTabsAdapter.addTab(mTabHost.newTabSpec("wallpapers").setIndicator("Wallpapers"), WallpaperItemListFragment.class, null);
 
         if (savedInstanceState != null) {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));

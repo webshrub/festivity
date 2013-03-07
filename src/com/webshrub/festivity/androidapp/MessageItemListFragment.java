@@ -9,17 +9,17 @@ import android.os.Bundle;
  * Date: 2/28/13
  * Time: 1:38 PM
  */
-public class MessageListFragment extends FestivityListFragment<Message> {
+public class MessageItemListFragment extends FestivityListFragment<MessageItem> {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         resourceLayoutId = R.layout.simple_list_item_1;
-        data = new Message[Shakespeare.TITLES.length];
+        data = new MessageItem[Shakespeare.TITLES.length];
         String[] titles = Shakespeare.TITLES;
         for (int i = 0, titlesLength = titles.length; i < titlesLength; i++) {
             String title = titles[i];
             String details = Shakespeare.DIALOGUE[i];
-            data[i] = new Message(i, title, details);
+            data[i] = new MessageItem(i, title, details);
         }
         super.onActivityCreated(savedInstanceState);
     }

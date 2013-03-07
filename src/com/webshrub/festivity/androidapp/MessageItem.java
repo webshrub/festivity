@@ -9,21 +9,21 @@ import android.os.Parcelable;
  * Date: 3/5/13
  * Time: 3:14 PM
  */
-public class Message implements FestivityItem {
+public class MessageItem implements FestivityItem {
     private int id;
     private String teaser;
     private String details;
 
-    public Message() {
+    public MessageItem() {
     }
 
-    public Message(int id, String teaser, String details) {
+    public MessageItem(int id, String teaser, String details) {
         this.id = id;
         this.teaser = teaser;
         this.details = details;
     }
 
-    public Message(Parcel in) {
+    public MessageItem(Parcel in) {
         readFromParcel(in);
     }
 
@@ -75,12 +75,12 @@ public class Message implements FestivityItem {
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public Message createFromParcel(Parcel in) {
-            return new Message(in);
+        public MessageItem createFromParcel(Parcel in) {
+            return new MessageItem(in);
         }
 
-        public Message[] newArray(int size) {
-            return new Message[size];
+        public MessageItem[] newArray(int size) {
+            return new MessageItem[size];
         }
     };
 }

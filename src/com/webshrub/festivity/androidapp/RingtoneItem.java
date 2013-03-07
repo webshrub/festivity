@@ -8,7 +8,7 @@ import android.os.Parcel;
  * Date: 3/5/13
  * Time: 3:15 PM
  */
-public class Ringtone implements FestivityItem {
+public class RingtoneItem implements FestivityItem {
     private String id;
     private String ringtoneTeaser;
     private String ringtoneText;
