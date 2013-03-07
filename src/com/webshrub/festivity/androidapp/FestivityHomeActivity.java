@@ -34,7 +34,7 @@ import java.util.ArrayList;
  * that switches between tabs and also allows the user to perform horizontal
  * flicks to move between the tabs.
  */
-public class FestivityActivity extends SherlockFragmentActivity {
+public class FestivityHomeActivity extends SherlockFragmentActivity {
     TabHost mTabHost;
     ViewPager mViewPager;
     TabsAdapter mTabsAdapter;

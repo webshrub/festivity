@@ -7,7 +7,7 @@
     <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
     <application android:hardwareAccelerated="true" android:label="@string/application_name" android:icon="@drawable/ic_launcher"
                  android:theme="@style/Theme.AndroidDevelopers">
-        <activity android:name="FestivityActivity" android:label="@string/application_name">
+        <activity android:name=".FestivityHomeActivity" android:label="@string/application_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.DEFAULT"/>

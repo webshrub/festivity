@@ -17,7 +17,7 @@ import com.actionbarsherlock.view.MenuItem;
  * Date: 2/28/13
  * Time: 1:38 PM
  */
-public class FestivityListFragment<T extends FestivityItem> extends SherlockListFragment {
+public class FestivityItemListFragment<T extends FestivityItem> extends SherlockListFragment {
     public static final String FESTIVITY_EXTRA_KEY = "extra";
     protected T[] data;
     protected int resourceLayoutId;

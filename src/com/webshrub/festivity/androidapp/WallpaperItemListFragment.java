@@ -8,7 +8,7 @@ import android.os.Bundle;
  * Date: 2/28/13
  * Time: 1:38 PM
  */
-public class WallpaperItemListFragment extends FestivityListFragment<WallpaperItem> {
+public class WallpaperItemListFragment extends FestivityItemListFragment<WallpaperItem> {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
