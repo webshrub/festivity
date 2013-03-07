@@ -9,7 +9,7 @@ import android.os.Parcelable;
  * Date: 3/5/13
  * Time: 3:14 PM
  */
-public class Wallpaper implements Parcelable{
+public class Wallpaper implements FestivityItem{
     private String id;
     private String wallpaperTeaser;
     private String wallpaperText;
@@ -21,5 +21,20 @@ public class Wallpaper implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+    }
+
+    @Override
+    public int getId() {
+        return 0;
+    }
+
+    @Override
+    public String getTeaser() {
+        return null;
+    }
+
+    @Override
+    public String getDetails() {
+        return null;
     }
 }

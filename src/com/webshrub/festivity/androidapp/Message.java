@@ -9,18 +9,18 @@ import android.os.Parcelable;
  * Date: 3/5/13
  * Time: 3:14 PM
  */
-public class Message implements Parcelable {
+public class Message implements FestivityItem {
     private int id;
-    private String messageTeaser;
-    private String messageText;
+    private String teaser;
+    private String details;
 
     public Message() {
     }
 
-    public Message(int id, String messageTeaser, String messageText) {
+    public Message(int id, String teaser, String details) {
         this.id = id;
-        this.messageTeaser = messageTeaser;
-        this.messageText = messageText;
+        this.teaser = teaser;
+        this.details = details;
     }
 
     public Message(Parcel in) {
@@ -35,25 +35,25 @@ public class Message implements Parcelable {
         this.id = id;
     }
 
-    public String getMessageTeaser() {
-        return messageTeaser;
+    public String getTeaser() {
+        return teaser;
     }
 
-    public void setMessageTeaser(String messageTeaser) {
-        this.messageTeaser = messageTeaser;
+    public void setTeaser(String teaser) {
+        this.teaser = teaser;
     }
 
-    public String getMessageText() {
-        return messageText;
+    public String getDetails() {
+        return details;
     }
 
-    public void setMessageText(String messageText) {
-        this.messageText = messageText;
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     @Override
     public String toString() {
-        return messageTeaser;
+        return teaser;
     }
 
     @Override
@@ -64,14 +64,14 @@ public class Message implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
-        dest.writeString(messageTeaser);
-        dest.writeString(messageText);
+        dest.writeString(teaser);
+        dest.writeString(details);
     }
 
     private void readFromParcel(Parcel in) {
         id = in.readInt();
-        messageTeaser = in.readString();
-        messageText = in.readString();
+        teaser = in.readString();
+        details = in.readString();
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

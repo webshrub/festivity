@@ -1,7 +1,6 @@
 package com.webshrub.festivity.androidapp;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -9,7 +8,7 @@ import android.os.Parcelable;
  * Date: 3/5/13
  * Time: 3:15 PM
  */
-public class Ringtone implements Parcelable{
+public class Ringtone implements FestivityItem {
     private String id;
     private String ringtoneTeaser;
     private String ringtoneText;
@@ -21,5 +20,20 @@ public class Ringtone implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+    }
+
+    @Override
+    public int getId() {
+        return 0;
+    }
+
+    @Override
+    public String getTeaser() {
+        return null;
+    }
+
+    @Override
+    public String getDetails() {
+        return null;
     }
 }

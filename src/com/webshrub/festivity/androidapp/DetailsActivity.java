@@ -16,7 +16,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
  * Date: 3/7/13
  * Time: 1:03 AM
  */
-public class DetailsActivity extends SherlockFragmentActivity {
+public class DetailsActivity<T extends FestivityItem> extends SherlockFragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class DetailsActivity extends SherlockFragmentActivity {
         getSupportFragmentManager().beginTransaction().add(android.R.id.content, detailsFragment).commit();
     }
 
-    public static class DetailsFragment extends SherlockFragment {
+    public static class DetailsFragment<T extends FestivityItem> extends SherlockFragment {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class DetailsActivity extends SherlockFragmentActivity {
             int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getActivity().getResources().getDisplayMetrics());
             text.setPadding(padding, padding, padding, padding);
             scroller.addView(text);
-            text.setText(((Message) getArguments().getParcelable(FestivityListFragment.FESTIVITY_EXTRA_KEY)).getMessageText());
+            text.setText(((FestivityItem) getArguments().getParcelable(FestivityListFragment.FESTIVITY_EXTRA_KEY)).getDetails());
             return scroller;
         }
     }

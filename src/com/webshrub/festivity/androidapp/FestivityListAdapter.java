@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
  * Date: 3/5/13
  * Time: 1:05 PM
  */
-public class FestivityListAdapter<T> extends ArrayAdapter<T> {
+public class FestivityListAdapter<T extends FestivityItem> extends ArrayAdapter<T> {
 
     public FestivityListAdapter(Context context, int layoutResourceId, T[] data) {
         super(context, layoutResourceId, data);
