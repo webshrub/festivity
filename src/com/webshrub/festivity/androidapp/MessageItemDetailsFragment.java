@@ -14,7 +14,8 @@ import android.widget.TextView;
  * Date: 3/7/13
  * Time: 2:40 PM
  */
-public class MessageFragment extends FestivityItemDetailsFragment {
+public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<MessageItem> {
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ScrollView scroller = new ScrollView(getActivity());
