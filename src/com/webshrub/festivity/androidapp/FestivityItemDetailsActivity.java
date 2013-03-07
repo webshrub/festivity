@@ -1,7 +1,9 @@
 package com.webshrub.festivity.androidapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.MenuItem;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,6 +16,7 @@ public class FestivityItemDetailsActivity<T extends FestivityItem> extends Sherl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         FestivityItemDetailsFragment detailsFragment = null;
         FestivityItem item = getIntent().getExtras().getParcelable(FestivityConstants.FESTIVITY_ITEM_KEY);
         if (item instanceof MessageItem) {
@@ -27,5 +30,18 @@ public class FestivityItemDetailsActivity<T extends FestivityItem> extends Sherl
             detailsFragment.setArguments(getIntent().getExtras());
         }
         getSupportFragmentManager().beginTransaction().add(android.R.id.content, detailsFragment).commit();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(this, FestivityHomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

@@ -43,7 +43,7 @@ public class FestivityItemListFragment<T extends FestivityItem> extends Sherlock
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.main_menu, menu);
+        inflater.inflate(R.menu.menu_home, menu);
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         View searchView = searchItem.getActionView();
         SearchViewCompat.setOnQueryTextListener(searchView, new FestivityOnQueryTextListenerCompat());

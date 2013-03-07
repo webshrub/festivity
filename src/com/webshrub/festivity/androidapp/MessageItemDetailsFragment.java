@@ -1,5 +1,6 @@
 package com.webshrub.festivity.androidapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -7,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,6 +19,30 @@ import android.widget.TextView;
  * Time: 2:40 PM
  */
 public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<MessageItem> {
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_sms, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_send_sms:
+                Intent preferenceIntent = new Intent(getActivity(), FestivityPreferenceActivity.class);
+                startActivity(preferenceIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
