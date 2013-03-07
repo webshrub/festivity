@@ -23,7 +23,7 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
         int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getActivity().getResources().getDisplayMetrics());
         text.setPadding(padding, padding, padding, padding);
         scroller.addView(text);
-        text.setText(((FestivityItem) getArguments().getParcelable(FestivityItemListFragment.FESTIVITY_EXTRA_KEY)).getDetails());
+        text.setText(((MessageItem) getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM_KEY)).getDetails());
         return scroller;
     }
 }

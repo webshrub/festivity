@@ -18,7 +18,6 @@ import com.actionbarsherlock.view.MenuItem;
  * Time: 1:38 PM
  */
 public class FestivityItemListFragment<T extends FestivityItem> extends SherlockListFragment {
-    public static final String FESTIVITY_EXTRA_KEY = "extra";
     protected T[] data;
     protected int resourceLayoutId;
 
@@ -37,7 +36,7 @@ public class FestivityItemListFragment<T extends FestivityItem> extends Sherlock
     public void onListItemClick(ListView l, View v, int position, long id) {
         Intent intent = new Intent();
         intent.setClass(getActivity(), FestivityItemDetailsActivity.class);
-        intent.putExtra(FESTIVITY_EXTRA_KEY, (FestivityItem) getListAdapter().getItem(position));
+        intent.putExtra(FestivityConstants.FESTIVITY_ITEM_KEY, (FestivityItem) getListAdapter().getItem(position));
         startActivity(intent);
     }
 
