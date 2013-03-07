@@ -16,6 +16,7 @@
 package com.webshrub.festivity.androidapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -26,6 +27,8 @@ import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -168,6 +171,36 @@ public class FestivityHomeActivity extends SherlockFragmentActivity {
 
         @Override
         public void onPageScrollStateChanged(int state) {
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportMenuInflater().inflate(R.menu.menu_home, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_settings:
+                Intent preferenceIntent = new Intent(this, FestivityPreferenceActivity.class);
+                startActivity(preferenceIntent);
+                return true;
+            case R.id.menu_share_on_facebook:
+                Intent facebookIntent = new Intent(this, FestivityPreferenceActivity.class);
+                startActivity(facebookIntent);
+                return true;
+            case R.id.menu_share_on_twitter:
+                Intent twitterIntent = new Intent(this, FestivityPreferenceActivity.class);
+                startActivity(twitterIntent);
+                return true;
+            case R.id.menu_rate_us:
+                Intent rateUsIntent = new Intent(this, FestivityPreferenceActivity.class);
+                startActivity(rateUsIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.webshrub.festivity.androidapp;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -9,7 +8,7 @@ import android.os.Parcelable;
  * Date: 3/5/13
  * Time: 3:14 PM
  */
-public class WallpaperItem implements FestivityItem{
+public class WallpaperItem implements FestivityItem {
     private String id;
     private String wallpaperTeaser;
     private String wallpaperText;

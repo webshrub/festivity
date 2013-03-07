@@ -43,34 +43,10 @@ public class FestivityItemListFragment<T extends FestivityItem> extends Sherlock
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_home, menu);
+        inflater.inflate(R.menu.menu_list, menu);
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         View searchView = searchItem.getActionView();
         SearchViewCompat.setOnQueryTextListener(searchView, new FestivityOnQueryTextListenerCompat());
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_settings:
-                Intent preferenceIntent = new Intent(getActivity(), FestivityPreferenceActivity.class);
-                startActivity(preferenceIntent);
-                return true;
-            case R.id.menu_share_on_facebook:
-                Intent facebookIntent = new Intent(getActivity(), FestivityPreferenceActivity.class);
-                startActivity(facebookIntent);
-                return true;
-            case R.id.menu_share_on_twitter:
-                Intent twitterIntent = new Intent(getActivity(), FestivityPreferenceActivity.class);
-                startActivity(twitterIntent);
-                return true;
-            case R.id.menu_rate_us:
-                Intent rateUsIntent = new Intent(getActivity(), FestivityPreferenceActivity.class);
-                startActivity(rateUsIntent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     private class FestivityOnQueryTextListenerCompat extends SearchViewCompat.OnQueryTextListenerCompat {
