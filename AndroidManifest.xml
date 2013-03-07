@@ -20,6 +20,6 @@
                 <category android:name="com.webshrub.festivity.androidapp.CATEGORY"/>
             </intent-filter>
         </activity>
-        <activity android:name=".DetailsActivity"/>
+        <activity android:name=".FestivityDetailsActivity"/>
     </application>
 </manifest>
