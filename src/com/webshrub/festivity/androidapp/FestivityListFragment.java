@@ -4,16 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SearchViewCompat;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-
-import java.lang.reflect.Field;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,17 +24,20 @@ public class FestivityListFragment<T> extends SherlockListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // Give some text to display if there is no data.  In a real application this would come from a resource.
         setEmptyText("No data found.");
         // We have a menu item to show in action bar.
         setHasOptionsMenu(true);
         getListView().setTextFilterEnabled(true);
+        // Populate list with our static array of titles.
         setListAdapter(new FestivityListAdapter<T>(getActivity(), resourceLayoutId, data));
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Log.i("FragmentList", "Item clicked: " + id);
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), DetailsActivity.class);
+        intent.putExtra("index", position);
+        startActivity(intent);
     }
 
     @Override
