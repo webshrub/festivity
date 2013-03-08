@@ -677,6 +677,10 @@ containing a value of this type.
          */
         public static final int abs__config_showMenuShortcutsWhenKeyboardPresent=0x7f060003;
         public static final int abs__split_action_bar_is_narrow=0x7f060001;
+        /**  Change to true to show every time, for testing 
+ Change to true to show every time, for testing 
+         */
+        public static final int appirator_test_mode=0x7f060006;
     }
     public static final class color {
         public static final int abs__background_holo_dark=0x7f070000;
@@ -688,14 +692,20 @@ containing a value of this type.
         public static final int abs__bright_foreground_inverse_holo_dark=0x7f070006;
         public static final int abs__bright_foreground_inverse_holo_light=0x7f070007;
         public static final int abs__holo_blue_light=0x7f070008;
-        public static final int abs__primary_text_disable_only_holo_dark=0x7f07000d;
-        public static final int abs__primary_text_disable_only_holo_light=0x7f07000e;
-        public static final int abs__primary_text_holo_dark=0x7f07000f;
-        public static final int abs__primary_text_holo_light=0x7f070010;
-        public static final int android_green=0x7f070009;
-        public static final int background=0x7f07000c;
-        public static final int honeycombish_blue=0x7f07000a;
-        public static final int soft_grey=0x7f07000b;
+        public static final int abs__primary_text_disable_only_holo_dark=0x7f070010;
+        public static final int abs__primary_text_disable_only_holo_light=0x7f070011;
+        public static final int abs__primary_text_holo_dark=0x7f070012;
+        public static final int abs__primary_text_holo_light=0x7f070013;
+        public static final int android_green=0x7f07000c;
+        public static final int appirator_button_end_color=0x7f07000a;
+        /**  Change modify button colors 
+ Change modify button colors 
+         */
+        public static final int appirator_button_start_color=0x7f070009;
+        public static final int appirator_button_text_color=0x7f07000b;
+        public static final int background=0x7f07000f;
+        public static final int honeycombish_blue=0x7f07000d;
+        public static final int soft_grey=0x7f07000e;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -947,15 +957,16 @@ containing a value of this type.
         public static final int btn_check_on_holo_light=0x7f020081;
         public static final int btn_radio_off_holo_light=0x7f020082;
         public static final int btn_radio_on_holo_light=0x7f020083;
-        public static final int ic_launcher=0x7f020084;
-        public static final int ic_menu_refresh_holo_light=0x7f020085;
-        public static final int ic_menu_star_holo_light=0x7f020086;
-        public static final int ic_stat_android=0x7f020087;
-        public static final int icon=0x7f020088;
-        public static final int rounded_rect=0x7f020089;
-        public static final int selected_background=0x7f02008a;
-        public static final int spinner_default_holo_light=0x7f02008b;
-        public static final int spinner_disabled_holo_light=0x7f02008c;
+        public static final int button_appirator=0x7f020084;
+        public static final int ic_launcher=0x7f020085;
+        public static final int ic_menu_refresh_holo_light=0x7f020086;
+        public static final int ic_menu_star_holo_light=0x7f020087;
+        public static final int ic_stat_android=0x7f020088;
+        public static final int icon=0x7f020089;
+        public static final int rounded_rect=0x7f02008a;
+        public static final int selected_background=0x7f02008b;
+        public static final int spinner_default_holo_light=0x7f02008c;
+        public static final int spinner_disabled_holo_light=0x7f02008d;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f050022;
@@ -998,22 +1009,26 @@ containing a value of this type.
         public static final int abs__title=0x7f05001b;
         public static final int abs__titleDivider=0x7f05001c;
         public static final int abs__up=0x7f05000b;
+        public static final int cancel=0x7f050036;
         public static final int disableHome=0x7f050009;
         public static final int edit_query=0x7f050027;
         public static final int homeAsUp=0x7f050006;
         public static final int listMode=0x7f050002;
-        public static final int menu_rate_us=0x7f050034;
-        public static final int menu_search=0x7f050038;
-        public static final int menu_send_sms=0x7f05003b;
-        public static final int menu_set_ringtone=0x7f050039;
-        public static final int menu_set_wallpaper=0x7f05003c;
-        public static final int menu_settings=0x7f050037;
-        public static final int menu_share_on_facebook=0x7f050035;
-        public static final int menu_share_on_twitter=0x7f050036;
-        public static final int menu_share_ringtone=0x7f05003a;
-        public static final int menu_share_wallpaper=0x7f05003d;
+        public static final int menu_rate_us=0x7f050038;
+        public static final int menu_search=0x7f05003c;
+        public static final int menu_send_sms=0x7f05003f;
+        public static final int menu_set_ringtone=0x7f05003d;
+        public static final int menu_set_wallpaper=0x7f050040;
+        public static final int menu_settings=0x7f05003b;
+        public static final int menu_share_on_facebook=0x7f050039;
+        public static final int menu_share_on_twitter=0x7f05003a;
+        public static final int menu_share_ringtone=0x7f05003e;
+        public static final int menu_share_wallpaper=0x7f050041;
+        public static final int message=0x7f050033;
         public static final int normal=0x7f050001;
-        public static final int pager=0x7f050033;
+        public static final int pager=0x7f050037;
+        public static final int rate=0x7f050034;
+        public static final int rateLater=0x7f050035;
         public static final int showCustom=0x7f050008;
         public static final int showHome=0x7f050005;
         public static final int showTitle=0x7f050007;
@@ -1023,6 +1038,12 @@ containing a value of this type.
     }
     public static final class integer {
         public static final int abs__max_action_buttons=0x7f090000;
+        /**  Set this to 0 to remind every launch 
+ Set this to 0 to remind every launch 
+         */
+        public static final int appirator_days_before_reminding=0x7f090003;
+        public static final int appirator_days_until_prompt=0x7f090001;
+        public static final int appirator_launches_until_prompt=0x7f090002;
     }
     public static final class layout {
         public static final int abs__action_bar_home=0x7f030000;
@@ -1048,9 +1069,10 @@ containing a value of this type.
         public static final int abs__search_dropdown_item_icons_2line=0x7f030014;
         public static final int abs__search_view=0x7f030015;
         public static final int abs__simple_dropdown_hint=0x7f030016;
-        public static final int fragment_tabs_pager=0x7f030017;
-        public static final int sherlock_spinner_dropdown_item=0x7f030018;
-        public static final int sherlock_spinner_item=0x7f030019;
+        public static final int appirater=0x7f030017;
+        public static final int fragment_tabs_pager=0x7f030018;
+        public static final int sherlock_spinner_dropdown_item=0x7f030019;
+        public static final int sherlock_spinner_item=0x7f03001a;
     }
     public static final class menu {
         public static final int menu_home=0x7f0d0000;
@@ -1105,51 +1127,63 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abs__shareactionprovider_share_with_application=0x7f0a0009;
-        public static final int action_label_bak=0x7f0a001d;
-        public static final int action_label_bak_gradient=0x7f0a001f;
-        public static final int action_label_bak_image=0x7f0a0020;
-        public static final int action_label_bak_none=0x7f0a001e;
-        public static final int action_label_both=0x7f0a0013;
-        public static final int action_label_logo=0x7f0a0017;
-        public static final int action_label_nav=0x7f0a001c;
-        public static final int action_label_nav_drop_down=0x7f0a001a;
-        public static final int action_label_nav_label=0x7f0a001b;
-        public static final int action_label_nav_tabs=0x7f0a0019;
-        public static final int action_label_rate_us=0x7f0a0026;
-        public static final int action_label_refresh=0x7f0a0011;
-        public static final int action_label_search=0x7f0a0012;
-        public static final int action_label_send_sms=0x7f0a0027;
-        public static final int action_label_set_ringtone=0x7f0a0028;
-        public static final int action_label_set_wallpaper=0x7f0a002a;
-        public static final int action_label_settings=0x7f0a0015;
-        public static final int action_label_share_on_facebook=0x7f0a0024;
-        public static final int action_label_share_on_twitter=0x7f0a0025;
-        public static final int action_label_share_ringtone=0x7f0a0029;
-        public static final int action_label_share_wallpaper=0x7f0a002b;
-        public static final int action_label_text=0x7f0a0014;
-        public static final int action_label_up=0x7f0a0018;
-        public static final int activity_name=0x7f0a0010;
-        public static final int app_name=0x7f0a0016;
-        public static final int application_name=0x7f0a000f;
-        public static final int hello_world=0x7f0a0022;
-        public static final int new_fragment=0x7f0a0021;
-        public static final int preferences=0x7f0a0023;
+        public static final int action_label_bak=0x7f0a0024;
+        public static final int action_label_bak_gradient=0x7f0a0026;
+        public static final int action_label_bak_image=0x7f0a0027;
+        public static final int action_label_bak_none=0x7f0a0025;
+        public static final int action_label_both=0x7f0a001a;
+        public static final int action_label_logo=0x7f0a001e;
+        public static final int action_label_nav=0x7f0a0023;
+        public static final int action_label_nav_drop_down=0x7f0a0021;
+        public static final int action_label_nav_label=0x7f0a0022;
+        public static final int action_label_nav_tabs=0x7f0a0020;
+        public static final int action_label_rate_us=0x7f0a002d;
+        public static final int action_label_refresh=0x7f0a0018;
+        public static final int action_label_search=0x7f0a0019;
+        public static final int action_label_send_sms=0x7f0a002e;
+        public static final int action_label_set_ringtone=0x7f0a002f;
+        public static final int action_label_set_wallpaper=0x7f0a0031;
+        public static final int action_label_settings=0x7f0a001c;
+        public static final int action_label_share_on_facebook=0x7f0a002b;
+        public static final int action_label_share_on_twitter=0x7f0a002c;
+        public static final int action_label_share_ringtone=0x7f0a0030;
+        public static final int action_label_share_wallpaper=0x7f0a0032;
+        public static final int action_label_text=0x7f0a001b;
+        public static final int action_label_up=0x7f0a001f;
+        public static final int activity_name=0x7f0a0017;
+        public static final int app_name=0x7f0a001d;
+        /**  Change the market_url for other markets i.e. Amazon App Store
+    	Google Play = market://details?id=%s
+    	Amazon App Store = http://www.amazon.com/gp/mas/dl/android?p=%s
+     
+         */
+        public static final int appirator_app_title=0x7f0a000f;
+        public static final int appirator_market_url=0x7f0a0010;
+        public static final int application_name=0x7f0a0016;
+        public static final int hello_world=0x7f0a0029;
+        public static final int new_fragment=0x7f0a0028;
+        public static final int preferences=0x7f0a002a;
+        public static final int rate=0x7f0a0013;
+        public static final int rate_cancel=0x7f0a0015;
+        public static final int rate_later=0x7f0a0014;
+        public static final int rate_message=0x7f0a0012;
+        public static final int rate_title=0x7f0a0011;
     }
     public static final class style {
         public static final int DialogWindowTitle_Sherlock=0x7f0b0036;
         public static final int DialogWindowTitle_Sherlock_Light=0x7f0b0037;
         /**  style for the tabs 
          */
-        public static final int MyActionBarTabStyle=0x7f0b005c;
+        public static final int MyActionBarTabStyle=0x7f0b005d;
         /**  style the items within the overflow menu 
          */
-        public static final int MyDropDownListView=0x7f0b005b;
+        public static final int MyDropDownListView=0x7f0b005c;
         /**  style the list navigation 
          */
-        public static final int MyDropDownNav=0x7f0b005d;
+        public static final int MyDropDownNav=0x7f0b005e;
         /**  style the overflow menu 
          */
-        public static final int MyPopupMenu=0x7f0b005a;
+        public static final int MyPopupMenu=0x7f0b005b;
         public static final int Sherlock___TextAppearance_Small=0x7f0b004a;
         public static final int Sherlock___Theme=0x7f0b004e;
         public static final int Sherlock___Theme_DarkActionBar=0x7f0b0050;
@@ -1186,7 +1220,7 @@ containing a value of this type.
         /**  Variation on the Holo Light theme that styles the Action Bar 
 <item name="android:actionOverflowButtonStyle">@style/MyOverflowButton</item>
          */
-        public static final int Theme_AndroidDevelopers=0x7f0b0059;
+        public static final int Theme_AndroidDevelopers=0x7f0b005a;
         public static final int Theme_Sherlock=0x7f0b0052;
         public static final int Theme_Sherlock_Dialog=0x7f0b0057;
         public static final int Theme_Sherlock_Light=0x7f0b0053;
@@ -1241,6 +1275,7 @@ containing a value of this type.
         public static final int Widget_Sherlock_SearchAutoCompleteTextView=0x7f0b0034;
         public static final int Widget_Sherlock_Spinner_DropDown_ActionBar=0x7f0b0024;
         public static final int Widget_Sherlock_TextView_SpinnerItem=0x7f0b0032;
+        public static final int appiratorButton=0x7f0b0059;
     }
     public static final class xml {
         public static final int preferences=0x7f040000;

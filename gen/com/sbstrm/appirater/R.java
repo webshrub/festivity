@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.actionbarsherlock;
+package com.sbstrm.appirater;
 
 public final class R {
     public static final class array {
