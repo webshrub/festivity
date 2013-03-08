@@ -7,19 +7,21 @@
     <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
     <application android:hardwareAccelerated="true" android:label="@string/application_name" android:icon="@drawable/ic_launcher"
                  android:theme="@style/Theme.AndroidDevelopers">
-        <activity android:name="com.webshrub.festivity.holi.androidapp.FestivityHomeActivity" android:label="@string/application_name" android:launchMode="singleTop">
+        <activity android:label="@string/application_name" android:name="com.webshrub.festivity.holi.androidapp.FestivityHomeActivity"
+                  android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:label="@string/preferences" android:name="com.webshrub.festivity.holi.androidapp.FestivityPreferenceActivity" android:launchMode="singleTop">
+        <activity android:label="@string/preferences" android:name="com.webshrub.festivity.holi.androidapp.FestivityPreferenceActivity"
+                  android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="com.webshrub.festivity.androidapp.CATEGORY"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.webshrub.festivity.holi.androidapp.FestivityItemDetailsActivity"/>
+        <activity android:label="@string/application_name" android:name="com.webshrub.festivity.holi.androidapp.FestivityItemDetailsActivity"/>
     </application>
 </manifest>
