@@ -12,6 +12,7 @@ import com.actionbarsherlock.view.MenuItem;
  * Time: 1:03 AM
  */
 public class FestivityItemDetailsActivity<T extends FestivityItem> extends SherlockFragmentActivity {
+    public static final String TAG = "FestivityItemDetailsActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
