@@ -190,8 +190,21 @@ public class FestivityHomeActivity extends SherlockFragmentActivity {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(myUrl)));
                 return true;
             case R.id.menu_share_on_facebook:
+                String shareFacebookUrl = "https://www.facebook.com/dialog/feed?\n" +
+                        "  app_id=458358780877780&\n" +
+                        "  link=https://developers.facebook.com/docs/reference/dialogs/&\n" +
+                        "  picture=http://fbrell.com/f8.jpg&\n" +
+                        "  name=Facebook%20Dialogs&\n" +
+                        "  caption=Reference%20Documentation&\n" +
+                        "  description=Using%20Dialogs%20to%20interact%20with%20users.&\n" +
+                        "  redirect_uri=https://mighty-lowlands-6381.herokuapp.com/";
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(shareFacebookUrl)));
                 return true;
             case R.id.menu_share_on_twitter:
+                String shareTwitterUrl = "https://twitter.com/intent/tweet?" +
+                        "text=Friends%2C%20I%20am%20using%20%23dndmanager%20to%20block%20pesky%20Calls%2FSMS.%20Download%20it%20" +
+                        "http%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.webshrub.moonwalker.androidapp";
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(shareTwitterUrl)));
                 return true;
             case R.id.menu_settings:
                 Intent preferenceIntent = new Intent(this, FestivityPreferenceActivity.class);
