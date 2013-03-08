@@ -1,4 +1,4 @@
-package com.webshrub.festivity.androidapp;
+package com.webshrub.festivity.holi.androidapp;
 
 import android.content.Intent;
 import android.os.Bundle;

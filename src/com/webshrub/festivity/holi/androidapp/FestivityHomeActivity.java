@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webshrub.festivity.androidapp;
+package com.webshrub.festivity.holi.androidapp;
 
 import android.content.Context;
 import android.content.Intent;

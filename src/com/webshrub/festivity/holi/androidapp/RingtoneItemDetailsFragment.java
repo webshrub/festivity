@@ -1,4 +1,4 @@
-package com.webshrub.festivity.androidapp;
+package com.webshrub.festivity.holi.androidapp;
 
 import android.os.Bundle;
 import android.util.TypedValue;

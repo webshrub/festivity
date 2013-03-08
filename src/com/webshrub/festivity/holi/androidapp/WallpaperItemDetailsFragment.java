@@ -1,4 +1,4 @@
-package com.webshrub.festivity.androidapp;
+package com.webshrub.festivity.holi.androidapp;
 
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -17,7 +17,7 @@ import com.actionbarsherlock.view.MenuItem;
  * Date: 3/7/13
  * Time: 2:40 PM
  */
-public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<MessageItem> {
+public class WallpaperItemDetailsFragment extends FestivityItemDetailsFragment<RingtoneItem> {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -28,13 +28,15 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_sms, menu);
+        inflater.inflate(R.menu.menu_wallpaper, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_send_sms:
+            case R.id.menu_set_wallpaper:
+                return true;
+            case R.id.menu_share_wallpaper:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -48,7 +50,7 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
         int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getActivity().getResources().getDisplayMetrics());
         text.setPadding(padding, padding, padding, padding);
         scroller.addView(text);
-        text.setText(((MessageItem) getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM_KEY)).getDetails());
+        text.setText(((WallpaperItem) getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM_KEY)).getDetails());
         return scroller;
     }
 }

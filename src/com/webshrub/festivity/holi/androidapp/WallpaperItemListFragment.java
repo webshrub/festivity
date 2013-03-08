@@ -1,4 +1,4 @@
-package com.webshrub.festivity.androidapp;
+package com.webshrub.festivity.holi.androidapp;
 
 import android.os.Bundle;
 
@@ -8,17 +8,17 @@ import android.os.Bundle;
  * Date: 2/28/13
  * Time: 1:38 PM
  */
-public class RingtoneItemListFragment extends FestivityItemListFragment<RingtoneItem> {
+public class WallpaperItemListFragment extends FestivityItemListFragment<WallpaperItem> {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         resourceLayoutId = android.R.layout.simple_list_item_1;
-        data = new RingtoneItem[Shakespeare.TITLES.length];
+        data = new WallpaperItem[Shakespeare.TITLES.length];
         String[] titles = Shakespeare.TITLES;
         for (int i = 0, titlesLength = titles.length; i < titlesLength; i++) {
             String title = titles[i];
             String details = Shakespeare.DIALOGUE[i];
-            data[i] = new RingtoneItem(i, title, details);
+            data[i] = new WallpaperItem(i, title, details);
         }
         super.onActivityCreated(savedInstanceState);
     }

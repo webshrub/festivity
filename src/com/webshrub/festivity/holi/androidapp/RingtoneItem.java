@@ -1,4 +1,4 @@
-package com.webshrub.festivity.androidapp;
+package com.webshrub.festivity.holi.androidapp;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,21 +9,21 @@ import android.os.Parcelable;
  * Date: 3/5/13
  * Time: 3:14 PM
  */
-public class WallpaperItem implements FestivityItem {
+public class RingtoneItem implements FestivityItem {
     private int id;
     private String teaser;
     private String details;
 
-    public WallpaperItem() {
+    public RingtoneItem() {
     }
 
-    public WallpaperItem(int id, String teaser, String details) {
+    public RingtoneItem(int id, String teaser, String details) {
         this.id = id;
         this.teaser = teaser;
         this.details = details;
     }
 
-    public WallpaperItem(Parcel in) {
+    public RingtoneItem(Parcel in) {
         readFromParcel(in);
     }
 
@@ -75,12 +75,12 @@ public class WallpaperItem implements FestivityItem {
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public WallpaperItem createFromParcel(Parcel in) {
-            return new WallpaperItem(in);
+        public RingtoneItem createFromParcel(Parcel in) {
+            return new RingtoneItem(in);
         }
 
-        public WallpaperItem[] newArray(int size) {
-            return new WallpaperItem[size];
+        public RingtoneItem[] newArray(int size) {
+            return new RingtoneItem[size];
         }
     };
 }
