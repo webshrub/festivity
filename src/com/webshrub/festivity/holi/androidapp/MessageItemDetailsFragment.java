@@ -1,5 +1,6 @@
 package com.webshrub.festivity.holi.androidapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -35,6 +36,8 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_send_sms:
+                Intent contactPickerIntent = new Intent(getActivity(), ContactPickerActivity.class);
+                startActivity(contactPickerIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

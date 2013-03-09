@@ -22,6 +22,13 @@
                 <category android:name="com.webshrub.festivity.androidapp.CATEGORY"/>
             </intent-filter>
         </activity>
+        <activity android:label="@string/contact_picker" android:name="com.webshrub.festivity.holi.androidapp.ContactPickerActivity"
+                  android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="com.webshrub.festivity.androidapp.CATEGORY"/>
+            </intent-filter>
+        </activity>
         <activity android:label="@string/application_name" android:name="com.webshrub.festivity.holi.androidapp.FestivityItemDetailsActivity"/>
     </application>
 </manifest>
