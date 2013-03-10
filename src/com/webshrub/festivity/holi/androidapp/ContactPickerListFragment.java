@@ -33,6 +33,7 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
     private SimpleCursorAdapter mAdapter;
     // If non-null, this is the current filter the user has provided.
     private String mCurFilter;
+    private ActionMode mActionMode;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -45,8 +46,7 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
         // Create an empty adapter we will use to display the loaded data.
         mAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_checked, null, new String[]{Contacts.People.DISPLAY_NAME}, new int[]{android.R.id.text1}, 0);
         setListAdapter(mAdapter);
-        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        getListView().setMultiChoiceModeListener(new ContactPickerMultiChoiceModeListener());
+        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         // Start out with a progress indicator.
         setListShown(false);
         // Prepare the loader.  Either re-connect with an existing one, or start a new one.
@@ -64,6 +64,9 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
+        if (mActionMode == null) {
+            mActionMode = getActivity().startActionMode(new ContactPickerMultiChoiceModeListener());
+        }
         Toast.makeText(getActivity(), "Item clicked: " + id, Toast.LENGTH_LONG).show();
     }
 
@@ -110,7 +113,7 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
-
+            mActionMode = null;
         }
 
         /**
