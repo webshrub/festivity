@@ -10,9 +10,11 @@ import android.support.v4.content.Loader;
 import android.support.v4.widget.SearchViewCompat;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.TextUtils;
-import android.util.Log;
+import android.view.ActionMode;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -41,8 +43,10 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
         // We have a menu item to show in action bar.
         setHasOptionsMenu(true);
         // Create an empty adapter we will use to display the loaded data.
-        mAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_1, null, new String[]{Contacts.People.DISPLAY_NAME}, new int[]{android.R.id.text1}, 0);
+        mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.contact_row, null, new String[]{Contacts.People.DISPLAY_NAME}, new int[]{R.id.name}, 0);
         setListAdapter(mAdapter);
+        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        getListView().setMultiChoiceModeListener(new ContactPickerMultiChoiceModeListener());
         // Start out with a progress indicator.
         setListShown(false);
         // Prepare the loader.  Either re-connect with an existing one, or start a new one.
@@ -60,7 +64,7 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Log.i("FragmentComplexList", "Item clicked: " + id);
+        Toast.makeText(getActivity(), "Item clicked: " + id, Toast.LENGTH_LONG).show();
     }
 
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -95,6 +99,40 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
             mCurFilter = !TextUtils.isEmpty(newText) ? newText : null;
             getLoaderManager().restartLoader(0, null, ContactPickerListFragment.this);
             return true;
+        }
+    }
+
+    private class ContactPickerMultiChoiceModeListener implements AbsListView.MultiChoiceModeListener {
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, android.view.Menu menu) {
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+
+        }
+
+        /**
+         * This will be invoked when action mode is created. In our case , it is on long clicking a menu item
+         */
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, android.view.Menu menu) {
+            getActivity().getMenuInflater().inflate(R.menu.context_menu, menu);
+            return true;
+        }
+
+        /**
+         * Invoked when an action in the action mode is clicked
+         */
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, android.view.MenuItem item) {
+            Toast.makeText(getActivity(), "Applying " + item.getTitle() + " on " + getListView().getCheckedItemCount() + " Rivers \n", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        @Override
+        public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
         }
     }
 }
