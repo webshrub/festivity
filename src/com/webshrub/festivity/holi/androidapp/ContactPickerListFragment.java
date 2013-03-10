@@ -43,7 +43,7 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
         // We have a menu item to show in action bar.
         setHasOptionsMenu(true);
         // Create an empty adapter we will use to display the loaded data.
-        mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.contact_row, null, new String[]{Contacts.People.DISPLAY_NAME}, new int[]{R.id.name}, 0);
+        mAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_checked, null, new String[]{Contacts.People.DISPLAY_NAME}, new int[]{android.R.id.text1}, 0);
         setListAdapter(mAdapter);
         getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         getListView().setMultiChoiceModeListener(new ContactPickerMultiChoiceModeListener());
