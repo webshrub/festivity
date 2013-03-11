@@ -7,8 +7,9 @@ import android.provider.ContactsContract;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v4.widget.SimpleCursorAdapter;
+import android.util.SparseBooleanArray;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockListFragment;
@@ -27,7 +28,7 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
     // These are the Contacts rows that we will retrieve.
     private String[] CONTACTS_SUMMARY_PROJECTION = new String[]{ContactsContract.CommonDataKinds.Phone._ID, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER};
     // This is the Adapter being used to display the list's data.
-    private SimpleCursorAdapter mAdapter;
+    private ArrayAdapter<Contact> mAdapter;
     // If non-null, this is the current filter the user has provided.
     private ActionMode mActionMode;
 
@@ -40,8 +41,7 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
         // We have a menu item to show in action bar.
         setHasOptionsMenu(true);
         // Create an empty adapter we will use to display the loaded data.
-        mAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_checked, null, new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME}, new int[]{android.R.id.text1}, 0);
-        mAdapter.setViewBinder(new ContactRowViewBinder());
+        mAdapter = new ArrayAdapter<Contact>(getSherlockActivity(), android.R.layout.simple_list_item_checked);
         setListAdapter(mAdapter);
         getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         // Start out with a progress indicator.
@@ -60,6 +60,13 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.send:
+                int length = getListView().getCount();
+                SparseBooleanArray checked = getListView().getCheckedItemPositions();
+                for (int position = 0; position < length; position++) {
+                    if (checked.get(position)) {
+                        Contact contact = (Contact) getListAdapter().getItem(position);
+                    }
+                }
                 Toast.makeText(getActivity(), "Sending SMS to selected " + getListView().getCheckedItemCount() + " contacts\n", Toast.LENGTH_LONG).show();
                 return true;
             default:
@@ -84,9 +91,15 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
         return new CursorLoader(getActivity(), baseUri, CONTACTS_SUMMARY_PROJECTION, select, null, ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
     }
 
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        // Swap the new cursor in.  (The framework will take care of closing the old cursor once we return.)
-        mAdapter.swapCursor(data);
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        while (cursor.moveToNext()) {
+            int displayNameIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+            int numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+            String displayName = cursor.getString(displayNameIndex).trim();
+            String number = cursor.getString(numberIndex).trim();
+            Contact contact = new Contact(displayName, number);
+            mAdapter.add(contact);
+        }
         // The list should now be shown.
         if (isResumed()) {
             setListShown(true);
@@ -97,7 +110,6 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
 
     public void onLoaderReset(Loader<Cursor> loader) {
         // This is called when the last Cursor provided to onLoadFinished() above is about to be closed.  We need to make sure we are no longer using it.
-        mAdapter.swapCursor(null);
     }
 
     private class ContactPickerMultiChoiceModeListener implements ActionMode.Callback {
