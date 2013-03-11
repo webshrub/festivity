@@ -7,9 +7,7 @@ import android.provider.Contacts;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v4.widget.SearchViewCompat;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.text.TextUtils;
 import android.view.ActionMode;
 import android.view.View;
 import android.widget.AbsListView;
@@ -32,7 +30,6 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
     // This is the Adapter being used to display the list's data.
     private SimpleCursorAdapter mAdapter;
     // If non-null, this is the current filter the user has provided.
-    private String mCurFilter;
     private ActionMode mActionMode;
 
     @Override
@@ -56,10 +53,18 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_list, menu);
-        MenuItem searchItem = menu.findItem(R.id.menu_search);
-        View searchView = searchItem.getActionView();
-        SearchViewCompat.setOnQueryTextListener(searchView, new ContactPickerOnQueryTextListenerCompat());
+        inflater.inflate(R.menu.menu_contact_list, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.send:
+                Toast.makeText(getActivity(), "Sending SMS to selected " + getListView().getCheckedItemCount() + " contacts\n", Toast.LENGTH_LONG).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -73,7 +78,7 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         // This is called when a new Loader needs to be created.  This sample only has one Loader, so we don't care about the ID.
         // First, pick the base URI to use depending on whether we are currently filtering.
-        Uri baseUri = mCurFilter != null ? Uri.withAppendedPath(Contacts.People.CONTENT_FILTER_URI, Uri.encode(mCurFilter)) : Contacts.People.CONTENT_URI;
+        Uri baseUri = Contacts.People.CONTENT_URI;
         // Now create and return a CursorLoader that will take care of creating a Cursor for the data being displayed.
         String select = "((" + Contacts.People.DISPLAY_NAME + " NOTNULL) AND (" + Contacts.People.DISPLAY_NAME + " != '' ))";
         return new CursorLoader(getActivity(), baseUri, CONTACTS_SUMMARY_PROJECTION, select, null, Contacts.People.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
@@ -95,16 +100,6 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
         mAdapter.swapCursor(null);
     }
 
-    private class ContactPickerOnQueryTextListenerCompat extends SearchViewCompat.OnQueryTextListenerCompat {
-        @Override
-        public boolean onQueryTextChange(String newText) {
-            // Called when the action bar search text has changed.  Update the search filter, and restart the loader to do a new query with this filter.
-            mCurFilter = !TextUtils.isEmpty(newText) ? newText : null;
-            getLoaderManager().restartLoader(0, null, ContactPickerListFragment.this);
-            return true;
-        }
-    }
-
     private class ContactPickerMultiChoiceModeListener implements AbsListView.MultiChoiceModeListener {
         @Override
         public boolean onPrepareActionMode(ActionMode mode, android.view.Menu menu) {
@@ -121,7 +116,7 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
          */
         @Override
         public boolean onCreateActionMode(ActionMode mode, android.view.Menu menu) {
-            getActivity().getMenuInflater().inflate(R.menu.context_menu, menu);
+            getActivity().getMenuInflater().inflate(R.menu.menu_contact_list_context, menu);
             return true;
         }
 
@@ -130,7 +125,7 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
          */
         @Override
         public boolean onActionItemClicked(ActionMode mode, android.view.MenuItem item) {
-            Toast.makeText(getActivity(), "Applying " + item.getTitle() + " on " + getListView().getCheckedItemCount() + " Rivers \n", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Applying " + item.getTitle() + " on " + getListView().getCheckedItemCount() + " contacts \n", Toast.LENGTH_LONG).show();
             return false;
         }
 
