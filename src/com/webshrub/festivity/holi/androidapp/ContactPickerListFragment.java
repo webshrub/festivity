@@ -120,10 +120,14 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.select_all:
-                    Toast.makeText(getActivity(), "Selecting all contacts\n", Toast.LENGTH_LONG).show();
+                    for (int count = 0; count < getListAdapter().getCount(); count++) {
+                        getListView().setItemChecked(count, true);
+                    }
                     return true;
                 case R.id.select_none:
-                    Toast.makeText(getActivity(), "Selecting 0 contacts\n", Toast.LENGTH_LONG).show();
+                    for (int count = 0; count < getListAdapter().getCount(); count++) {
+                        getListView().setItemChecked(count, false);
+                    }
                     return true;
                 default:
                     mode.finish();
