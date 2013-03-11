@@ -8,12 +8,11 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.view.ActionMode;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockListFragment;
+import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
@@ -70,7 +69,7 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         if (mActionMode == null) {
-            mActionMode = getActivity().startActionMode(new ContactPickerMultiChoiceModeListener());
+            mActionMode = getSherlockActivity().startActionMode(new ContactPickerMultiChoiceModeListener());
         }
         Toast.makeText(getActivity(), "Item clicked: " + id, Toast.LENGTH_LONG).show();
     }
@@ -100,9 +99,9 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
         mAdapter.swapCursor(null);
     }
 
-    private class ContactPickerMultiChoiceModeListener implements AbsListView.MultiChoiceModeListener {
+    private class ContactPickerMultiChoiceModeListener implements ActionMode.Callback {
         @Override
-        public boolean onPrepareActionMode(ActionMode mode, android.view.Menu menu) {
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
             return false;
         }
 
@@ -111,26 +110,25 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
             mActionMode = null;
         }
 
-        /**
-         * This will be invoked when action mode is created. In our case , it is on long clicking a menu item
-         */
         @Override
-        public boolean onCreateActionMode(ActionMode mode, android.view.Menu menu) {
-            getActivity().getMenuInflater().inflate(R.menu.menu_contact_list_context, menu);
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            mode.getMenuInflater().inflate(R.menu.menu_contact_list_context, menu);
             return true;
         }
 
-        /**
-         * Invoked when an action in the action mode is clicked
-         */
         @Override
-        public boolean onActionItemClicked(ActionMode mode, android.view.MenuItem item) {
-            Toast.makeText(getActivity(), "Applying " + item.getTitle() + " on " + getListView().getCheckedItemCount() + " contacts \n", Toast.LENGTH_LONG).show();
-            return false;
-        }
-
-        @Override
-        public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.select_all:
+                    Toast.makeText(getActivity(), "Selecting all contacts\n", Toast.LENGTH_LONG).show();
+                    return true;
+                case R.id.select_none:
+                    Toast.makeText(getActivity(), "Selecting 0 contacts\n", Toast.LENGTH_LONG).show();
+                    return true;
+                default:
+                    mode.finish();
+                    return false;
+            }
         }
     }
 }
