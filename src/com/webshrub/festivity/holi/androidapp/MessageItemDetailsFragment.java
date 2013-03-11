@@ -35,7 +35,7 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_send_sms:
+            case R.id.menu_send_to_contacts:
                 Intent contactPickerIntent = new Intent(getActivity(), ContactPickerActivity.class);
                 startActivity(contactPickerIntent);
                 return true;

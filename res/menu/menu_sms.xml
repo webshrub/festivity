@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_send_sms" android:showAsAction="ifRoom" android:title="@string/action_label_send_sms"/>
+    <item android:id="@+id/menu_send_to_contacts" android:showAsAction="ifRoom" android:title="@string/action_label_send_to_contacts"/>
 </menu>

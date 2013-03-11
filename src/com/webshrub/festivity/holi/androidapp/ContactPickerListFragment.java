@@ -3,7 +3,7 @@ package com.webshrub.festivity.holi.androidapp;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Contacts;
+import android.provider.ContactsContract;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -25,7 +25,7 @@ import com.actionbarsherlock.view.MenuItem;
  */
 public class ContactPickerListFragment extends SherlockListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
     // These are the Contacts rows that we will retrieve.
-    private static final String[] CONTACTS_SUMMARY_PROJECTION = new String[]{Contacts.People._ID, Contacts.People.DISPLAY_NAME,};
+    private String[] CONTACTS_SUMMARY_PROJECTION = new String[]{ContactsContract.CommonDataKinds.Phone._ID, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER};
     // This is the Adapter being used to display the list's data.
     private SimpleCursorAdapter mAdapter;
     // If non-null, this is the current filter the user has provided.
@@ -40,7 +40,8 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
         // We have a menu item to show in action bar.
         setHasOptionsMenu(true);
         // Create an empty adapter we will use to display the loaded data.
-        mAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_checked, null, new String[]{Contacts.People.DISPLAY_NAME}, new int[]{android.R.id.text1}, 0);
+        mAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_checked, null, new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME}, new int[]{android.R.id.text1}, 0);
+        mAdapter.setViewBinder(new ContactRowViewBinder());
         setListAdapter(mAdapter);
         getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         // Start out with a progress indicator.
@@ -77,10 +78,10 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         // This is called when a new Loader needs to be created.  This sample only has one Loader, so we don't care about the ID.
         // First, pick the base URI to use depending on whether we are currently filtering.
-        Uri baseUri = Contacts.People.CONTENT_URI;
+        Uri baseUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
         // Now create and return a CursorLoader that will take care of creating a Cursor for the data being displayed.
-        String select = "((" + Contacts.People.DISPLAY_NAME + " NOTNULL) AND (" + Contacts.People.DISPLAY_NAME + " != '' ))";
-        return new CursorLoader(getActivity(), baseUri, CONTACTS_SUMMARY_PROJECTION, select, null, Contacts.People.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
+        String select = "((" + ContactsContract.Contacts.DISPLAY_NAME + " NOTNULL) AND (" + ContactsContract.Contacts.DISPLAY_NAME + " != '' )" + "AND (" + ContactsContract.Contacts.HAS_PHONE_NUMBER + " != '0'" + "))";
+        return new CursorLoader(getActivity(), baseUri, CONTACTS_SUMMARY_PROJECTION, select, null, ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
     }
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
