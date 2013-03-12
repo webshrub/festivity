@@ -1,5 +1,8 @@
 package com.webshrub.festivity.holi.androidapp;
 
+import android.app.PendingIntent;
+import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,6 +10,7 @@ import android.provider.ContactsContract;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.telephony.SmsManager;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -25,6 +29,12 @@ import com.actionbarsherlock.view.MenuItem;
  * Time: 3:06 PM
  */
 public class ContactPickerListFragment extends SherlockListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+    public static final String ADDRESS = "address";
+    public static final String DATE = "date";
+    public static final String READ = "read";
+    public static final String STATUS = "status";
+    public static final String TYPE = "type";
+    public static final String BODY = "body";
     // These are the Contacts rows that we will retrieve.
     private String[] CONTACTS_SUMMARY_PROJECTION = new String[]{ContactsContract.CommonDataKinds.Phone._ID, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER};
     // This is the Adapter being used to display the list's data.
@@ -60,18 +70,37 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.send:
+                MessageItem messageItem = (MessageItem) getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM_KEY);
                 int length = getListView().getCount();
                 SparseBooleanArray checked = getListView().getCheckedItemPositions();
                 for (int position = 0; position < length; position++) {
                     if (checked.get(position)) {
                         Contact contact = (Contact) getListAdapter().getItem(position);
+                        sendSMS("9810572052", messageItem.getTeaser());
+                        saveSentSms("9810572052", messageItem.getTeaser());
                     }
                 }
-                Toast.makeText(getActivity(), "Sending SMS to selected " + getListView().getCheckedItemCount() + " contacts\n", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Sending SMS " + messageItem.getTeaser() + " to selected " + getListView().getCheckedItemCount() + " contacts\n", Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void sendSMS(String number, String message) {
+        PendingIntent messageIntent = PendingIntent.getActivity(getSherlockActivity(), 0, new Intent(), 0);
+        SmsManager.getDefault().sendTextMessage(number, null, message, messageIntent, null);
+    }
+
+    private void saveSentSms(String phoneNumber, String message) {
+        ContentValues values = new ContentValues();
+        values.put(ADDRESS, phoneNumber);
+        values.put(DATE, System.currentTimeMillis());
+        values.put(READ, 1);
+        values.put(STATUS, -1);
+        values.put(TYPE, 2);
+        values.put(BODY, message);
+        getSherlockActivity().getContentResolver().insert(Uri.parse("content://sms"), values);
     }
 
     @Override

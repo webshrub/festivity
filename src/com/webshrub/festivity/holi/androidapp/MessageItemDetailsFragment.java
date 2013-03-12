@@ -37,6 +37,7 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
         switch (item.getItemId()) {
             case R.id.menu_send_to_contacts:
                 Intent contactPickerIntent = new Intent(getActivity(), ContactPickerActivity.class);
+                contactPickerIntent.putExtra(FestivityConstants.FESTIVITY_ITEM_KEY, getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM_KEY));
                 startActivity(contactPickerIntent);
                 return true;
             default:

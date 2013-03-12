@@ -15,11 +15,12 @@ public class ContactPickerActivity extends SherlockFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FragmentManager fm = getSupportFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         // Create the list fragment and add it as our sole content.
-        if (fm.findFragmentById(android.R.id.content) == null) {
-            ContactPickerListFragment list = new ContactPickerListFragment();
-            fm.beginTransaction().add(android.R.id.content, list).commit();
+        if (fragmentManager.findFragmentById(android.R.id.content) == null) {
+            ContactPickerListFragment contactPickerListFragment = new ContactPickerListFragment();
+            contactPickerListFragment.setArguments(getIntent().getExtras());
+            fragmentManager.beginTransaction().add(android.R.id.content, contactPickerListFragment).commit();
         }
     }
 }
