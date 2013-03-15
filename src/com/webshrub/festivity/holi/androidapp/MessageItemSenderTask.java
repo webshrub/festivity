@@ -9,7 +9,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.telephony.SmsManager;
 
-public class MessageItemSenderTask extends AsyncTask<Contact, Void, Void> {
+public class MessageItemSenderTask extends AsyncTask<Contact, Integer, Void> {
     public static final String ADDRESS = "address";
     public static final String DATE = "date";
     public static final String READ = "read";
@@ -38,16 +38,18 @@ public class MessageItemSenderTask extends AsyncTask<Contact, Void, Void> {
 
     @Override
     protected Void doInBackground(Contact... contacts) {
-        for (Contact contact : contacts) {
-//            sendSMS(contact.getNumber(), messageItem.getDetails());
-//            saveSentSms(contact.getNumber(), messageItem.getDetails());
+        for (int count = 0; count < contacts.length; count++) {
+            Contact contact = contacts[count];
+            sendSMS(contact.getNumber(), messageItem.getDetails());
+            saveSentSms(contact.getNumber(), messageItem.getDetails());
 //            sendSMS("9810572052", messageItem.getDetails());
 //            saveSentSms("9810572052", messageItem.getDetails());
-        }
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+            publishProgress(count + 1, contacts.length);
         }
         return null;
     }
@@ -56,6 +58,15 @@ public class MessageItemSenderTask extends AsyncTask<Contact, Void, Void> {
     protected void onPostExecute(Void result) {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... progress) {
+        if (progress[0].equals(progress[1])) {
+            progressDialog.setMessage("Message sent  to all " + progress[1] + " selected contacts..");
+        } else {
+            progressDialog.setMessage("Message sent  to " + progress[0] + " out of " + progress[1] + " selected contacts..");
         }
     }
 

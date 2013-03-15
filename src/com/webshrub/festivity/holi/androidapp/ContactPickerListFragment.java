@@ -76,6 +76,7 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
                     return true;
                 }
                 new MessageItemSenderTask(getSherlockActivity(), messageItem).execute(contactList.toArray(new Contact[contactList.size()]));
+                selectDeselectAll(false);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -141,19 +142,21 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.select_all:
-                    for (int count = 0; count < mAdapter.getCount(); count++) {
-                        getListView().setItemChecked(count, true);
-                    }
+                    selectDeselectAll(true);
                     return true;
                 case R.id.select_none:
-                    for (int count = 0; count < mAdapter.getCount(); count++) {
-                        getListView().setItemChecked(count, false);
-                    }
+                    selectDeselectAll(false);
                     return true;
                 default:
                     mode.finish();
                     return false;
             }
+        }
+    }
+
+    private void selectDeselectAll(boolean select) {
+        for (int count = 0; count < mAdapter.getCount(); count++) {
+            getListView().setItemChecked(count, select);
         }
     }
 }
