@@ -1,13 +1,13 @@
 package com.webshrub.festivity.holi.androidapp;
 
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.telephony.SmsManager;
+
+import java.util.ArrayList;
 
 public class MessageItemSenderTask extends AsyncTask<Contact, Integer, Void> {
     public static final String ADDRESS = "address";
@@ -71,8 +71,8 @@ public class MessageItemSenderTask extends AsyncTask<Contact, Integer, Void> {
     }
 
     private void sendSMS(String number, String message) {
-        PendingIntent messageIntent = PendingIntent.getActivity(context, 0, new Intent(), 0);
-        SmsManager.getDefault().sendTextMessage(number, null, message, messageIntent, null);
+        ArrayList<String> messages = SmsManager.getDefault().divideMessage(message);
+        SmsManager.getDefault().sendMultipartTextMessage(number, null, messages, null, null);
     }
 
     private void saveSentSms(String phoneNumber, String message) {
