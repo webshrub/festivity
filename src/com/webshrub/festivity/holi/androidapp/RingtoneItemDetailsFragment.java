@@ -162,13 +162,8 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
             currentSong = songManager.getRandomRingtoneItem();
             playSong(currentSong);
         } else {
-            if (!songManager.isLast(currentSong)) {
-                currentSong = songManager.getNextRingtoneItem(currentSong);
-                playSong(currentSong);
-            } else {
-                currentSong = songManager.getFirstRingtoneItem();
-                playSong(currentSong);
-            }
+            currentSong = songManager.getNextRingtoneItem(currentSong);
+            playSong(currentSong);
         }
     }
 
@@ -225,26 +220,16 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
     private class ButtonNextOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            if (!songManager.isLast(currentSong)) {
-                currentSong = songManager.getNextRingtoneItem(currentSong);
-                playSong(currentSong);
-            } else {
-                currentSong = songManager.getFirstRingtoneItem();
-                playSong(currentSong);
-            }
+            currentSong = songManager.getNextRingtoneItem(currentSong);
+            playSong(currentSong);
         }
     }
 
     private class ButtonPreviousOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            if (!songManager.isFirst(currentSong)) {
-                currentSong = songManager.getPreviousRingtoneItem(currentSong);
-                playSong(currentSong);
-            } else {
-                currentSong = songManager.getLastRingtoneItem();
-                playSong(currentSong);
-            }
+            currentSong = songManager.getPreviousRingtoneItem(currentSong);
+            playSong(currentSong);
         }
     }
 

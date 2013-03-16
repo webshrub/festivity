@@ -32,33 +32,26 @@ public class RingtoneItemManager {
         return ringtoneItemList;
     }
 
-    public RingtoneItem getNextRingtoneItem(RingtoneItem currentRigRingtoneItem) {
-        return ringtoneItemList.get(currentRigRingtoneItem.getId() + 1);
+    public RingtoneItem getNextRingtoneItem(RingtoneItem currentRingtoneItem) {
+        if (!(currentRingtoneItem.getId() == ringtoneItemList.size() - 1)) {
+            return ringtoneItemList.get(currentRingtoneItem.getId() + 1);
+        } else {
+            return ringtoneItemList.get(0);
+        }
     }
 
-    public RingtoneItem getPreviousRingtoneItem(RingtoneItem currentRigRingtoneItem) {
-        return ringtoneItemList.get(currentRigRingtoneItem.getId() - 1);
-    }
 
-    public RingtoneItem getFirstRingtoneItem() {
-        return ringtoneItemList.get(0);
-    }
-
-    public RingtoneItem getLastRingtoneItem() {
-        return ringtoneItemList.get(ringtoneItemList.size() - 1);
+    public RingtoneItem getPreviousRingtoneItem(RingtoneItem currentRingtoneItem) {
+        if (!(currentRingtoneItem.getId() == 0)) {
+            return ringtoneItemList.get(currentRingtoneItem.getId() - 1);
+        } else {
+            return ringtoneItemList.get(ringtoneItemList.size() - 1);
+        }
     }
 
     public RingtoneItem getRandomRingtoneItem() {
         int songIndex = new Random().nextInt((ringtoneItemList.size() - 1) + 1);
         return ringtoneItemList.get(songIndex);
-    }
-
-    public boolean isFirst(RingtoneItem currentRingtoneItem) {
-        return currentRingtoneItem.getId() == 0;
-    }
-
-    public boolean isLast(RingtoneItem currentRingtoneItem) {
-        return currentRingtoneItem.getId() == ringtoneItemList.size() - 1;
     }
 
     private class RingtoneItemExtensionFilter implements FilenameFilter {
