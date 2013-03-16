@@ -1,15 +1,21 @@
 package com.webshrub.festivity.holi.androidapp;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.TypedValue;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
+import android.widget.ImageButton;
+import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+
+import java.io.IOException;
+import java.util.Random;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,12 +23,44 @@ import com.actionbarsherlock.view.MenuItem;
  * Date: 3/7/13
  * Time: 2:40 PM
  */
-public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<RingtoneItem> {
+public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<RingtoneItem> implements MediaPlayer.OnCompletionListener, SeekBar.OnSeekBarChangeListener {
+    private ImageButton btnPlay;
+    private ImageButton btnRepeat;
+    private ImageButton btnShuffle;
+    private SeekBar songProgressBar;
+    private TextView songTitle;
+    private TextView songCurrentDurationLabel;
+    private TextView songTotalDurationLabel;
+    private boolean isShuffle;
+    private boolean isRepeat;
+    private int songIndex;
+    private MediaPlayer mediaPlayer;
+    private Handler handler;
+    private Runnable updateTimerTask;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
+        isShuffle = false;
+        isRepeat = false;
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setOnCompletionListener(this);
+        handler = new Handler();
+        updateTimerTask = new Runnable() {
+            public void run() {
+                long totalDuration = mediaPlayer.getDuration();
+                long currentDuration = mediaPlayer.getCurrentPosition();
+                songTotalDurationLabel.setText(FestivityUtilities.milliSecondsToTimer(totalDuration));
+                songCurrentDurationLabel.setText(FestivityUtilities.milliSecondsToTimer(currentDuration));
+                int progress = FestivityUtilities.getProgressPercentage(currentDuration, totalDuration);
+                songProgressBar.setProgress(progress);
+                handler.postDelayed(this, 100);
+            }
+        };
+        RingtoneItem ringtoneItem = getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM_KEY);
+        songIndex = ringtoneItem.getId();
+        playSong(songIndex);
     }
 
     @Override
@@ -45,12 +83,203 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ScrollView scroller = new ScrollView(getActivity());
-        TextView text = new TextView(getActivity());
-        int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getActivity().getResources().getDisplayMetrics());
-        text.setPadding(padding, padding, padding, padding);
-        scroller.addView(text);
-        text.setText(((RingtoneItem) getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM_KEY)).getDetails());
-        return scroller;
+        super.onCreate(savedInstanceState);
+        View view = inflater.inflate(R.layout.player, container, false);
+
+        ImageButton btnForward = (ImageButton) view.findViewById(R.id.btnForward);
+        btnForward.setOnClickListener(new ButtonForwardOnClickListener());
+        ImageButton btnBackward = (ImageButton) view.findViewById(R.id.btnBackward);
+        btnBackward.setOnClickListener(new ButtonBackwardOnClickListener());
+        ImageButton btnNext = (ImageButton) view.findViewById(R.id.btnNext);
+        btnNext.setOnClickListener(new ButtonNextOnClickListener());
+        ImageButton btnPrevious = (ImageButton) view.findViewById(R.id.btnPrevious);
+        btnPrevious.setOnClickListener(new ButtonPreviousOnClickListener());
+
+        btnPlay = (ImageButton) view.findViewById(R.id.btnPlay);
+        btnPlay.setOnClickListener(new ButtonPlayOnClickListener());
+
+        btnRepeat = (ImageButton) view.findViewById(R.id.btnRepeat);
+        btnRepeat.setOnClickListener(new ButtonRepeatOnClickListener());
+
+        btnShuffle = (ImageButton) view.findViewById(R.id.btnShuffle);
+        btnShuffle.setOnClickListener(new ButtonShuffleOnClickListener());
+
+        songProgressBar = (SeekBar) view.findViewById(R.id.songProgressBar);
+        songTitle = (TextView) view.findViewById(R.id.songTitle);
+        songCurrentDurationLabel = (TextView) view.findViewById(R.id.songCurrentDurationLabel);
+        songTotalDurationLabel = (TextView) view.findViewById(R.id.songTotalDurationLabel);
+        songProgressBar.setOnSeekBarChangeListener(this);
+        return view;
+    }
+
+    public void playSong(int songIndex) {
+        try {
+            mediaPlayer.reset();
+            mediaPlayer.setDataSource(RingtoneItemManager.getInstance().getRingtoneItem(songIndex).getDetails());
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+            songTitle.setText(RingtoneItemManager.getInstance().getRingtoneItem(songIndex).getTeaser());
+            btnPlay.setImageResource(R.drawable.btn_pause);
+            songProgressBar.setProgress(0);
+            songProgressBar.setMax(100);
+            updateProgressBar();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateProgressBar() {
+        handler.postDelayed(updateTimerTask, 100);
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+        handler.removeCallbacks(updateTimerTask);
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        handler.removeCallbacks(updateTimerTask);
+        int totalDuration = mediaPlayer.getDuration();
+        int currentPosition = FestivityUtilities.progressToTimer(seekBar.getProgress(), totalDuration);
+        mediaPlayer.seekTo(currentPosition);
+        updateProgressBar();
+    }
+
+    @Override
+    public void onCompletion(MediaPlayer mediaPlayer) {
+        if (isRepeat) {
+            playSong(songIndex);
+        } else if (isShuffle) {
+            Random rand = new Random();
+            songIndex = rand.nextInt((RingtoneItemManager.getInstance().getRingtoneItemList().size() - 1) + 1);
+            playSong(songIndex);
+        } else {
+            if (songIndex < (RingtoneItemManager.getInstance().getRingtoneItemList().size() - 1)) {
+                playSong(songIndex + 1);
+                songIndex = songIndex + 1;
+            } else {
+                playSong(0);
+                songIndex = 0;
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(updateTimerTask);
+        mediaPlayer.release();
+    }
+
+    private class ButtonPlayOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            if (mediaPlayer.isPlaying()) {
+                if (mediaPlayer != null) {
+                    mediaPlayer.pause();
+                    btnPlay.setImageResource(R.drawable.btn_play);
+                }
+            } else {
+                if (mediaPlayer != null) {
+                    mediaPlayer.start();
+                    btnPlay.setImageResource(R.drawable.btn_pause);
+                }
+            }
+        }
+    }
+
+    private class ButtonForwardOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            int currentPosition = mediaPlayer.getCurrentPosition();
+            int seekForwardTime = 5000;
+            if (currentPosition + seekForwardTime <= mediaPlayer.getDuration()) {
+                mediaPlayer.seekTo(currentPosition + seekForwardTime);
+            } else {
+                mediaPlayer.seekTo(mediaPlayer.getDuration());
+            }
+        }
+    }
+
+    private class ButtonBackwardOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            int currentPosition = mediaPlayer.getCurrentPosition();
+            int seekBackwardTime = 5000;
+            if (currentPosition - seekBackwardTime >= 0) {
+                mediaPlayer.seekTo(currentPosition - seekBackwardTime);
+            } else {
+                mediaPlayer.seekTo(0);
+            }
+        }
+    }
+
+    private class ButtonNextOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            if (songIndex < (RingtoneItemManager.getInstance().getRingtoneItemList().size() - 1)) {
+                playSong(songIndex + 1);
+                songIndex = songIndex + 1;
+            } else {
+                playSong(0);
+                songIndex = 0;
+            }
+        }
+    }
+
+    private class ButtonPreviousOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            if (songIndex > 0) {
+                playSong(songIndex - 1);
+                songIndex = songIndex - 1;
+            } else {
+                playSong(RingtoneItemManager.getInstance().getRingtoneItemList().size() - 1);
+                songIndex = RingtoneItemManager.getInstance().getRingtoneItemList().size() - 1;
+            }
+        }
+    }
+
+    private class ButtonRepeatOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            if (isRepeat) {
+                isRepeat = false;
+                Toast.makeText(getSherlockActivity(), "Repeat is OFF", Toast.LENGTH_SHORT).show();
+                btnRepeat.setImageResource(R.drawable.btn_repeat);
+            } else {
+                isRepeat = true;
+                Toast.makeText(getSherlockActivity(), "Repeat is ON", Toast.LENGTH_SHORT).show();
+                isShuffle = false;
+                btnRepeat.setImageResource(R.drawable.btn_repeat_focused);
+                btnShuffle.setImageResource(R.drawable.btn_shuffle);
+            }
+        }
+    }
+
+    private class ButtonShuffleOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            if (isShuffle) {
+                isShuffle = false;
+                Toast.makeText(getSherlockActivity(), "Shuffle is OFF", Toast.LENGTH_SHORT).show();
+                btnShuffle.setImageResource(R.drawable.btn_shuffle);
+            } else {
+                isShuffle = true;
+                Toast.makeText(getSherlockActivity(), "Shuffle is ON", Toast.LENGTH_SHORT).show();
+                isRepeat = false;
+                btnShuffle.setImageResource(R.drawable.btn_shuffle_focused);
+                btnRepeat.setImageResource(R.drawable.btn_repeat);
+            }
+        }
     }
 }

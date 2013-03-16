@@ -2,6 +2,8 @@ package com.webshrub.festivity.holi.androidapp;
 
 import android.os.Bundle;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Ahsan.Javed
@@ -13,13 +15,8 @@ public class RingtoneItemListFragment extends FestivityItemListFragment<Ringtone
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         resourceLayoutId = android.R.layout.simple_list_item_1;
-        data = new RingtoneItem[Shakespeare.TITLES.length];
-        String[] titles = Shakespeare.TITLES;
-        for (int i = 0, titlesLength = titles.length; i < titlesLength; i++) {
-            String title = titles[i];
-            String details = Shakespeare.DIALOGUE[i];
-            data[i] = new RingtoneItem(i, title, details);
-        }
+        List<RingtoneItem> ringtoneItemList = RingtoneItemManager.getInstance().getRingtoneItemList();
+        data = ringtoneItemList.toArray(new RingtoneItem[ringtoneItemList.size()]);
         super.onActivityCreated(savedInstanceState);
     }
 }
