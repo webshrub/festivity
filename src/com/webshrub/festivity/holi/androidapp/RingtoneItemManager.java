@@ -51,6 +51,14 @@ public class RingtoneItemManager {
         return ringtoneItemList.get(ringtoneItemList.size() - 1);
     }
 
+    public boolean isFirst(RingtoneItem currentRingtoneItem) {
+        return currentRingtoneItem.getId() == 0;
+    }
+
+    public boolean isLast(RingtoneItem currentRingtoneItem) {
+        return currentRingtoneItem.getId() == ringtoneItemList.size() - 1;
+    }
+
     private class RingtoneItemExtensionFilter implements FilenameFilter {
         public boolean accept(File dir, String name) {
             return (name.endsWith(".mp3") || name.endsWith(".MP3"));
