@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class RingtoneItemManager {
     private static final RingtoneItemManager INSTANCE = new RingtoneItemManager();
@@ -31,10 +32,6 @@ public class RingtoneItemManager {
         return ringtoneItemList;
     }
 
-    public RingtoneItem getRingtoneItem(int index) {
-        return ringtoneItemList.get(index);
-    }
-
     public RingtoneItem getNextRingtoneItem(RingtoneItem currentRigRingtoneItem) {
         return ringtoneItemList.get(currentRigRingtoneItem.getId() + 1);
     }
@@ -49,6 +46,11 @@ public class RingtoneItemManager {
 
     public RingtoneItem getLastRingtoneItem() {
         return ringtoneItemList.get(ringtoneItemList.size() - 1);
+    }
+
+    public RingtoneItem getRandomRingtoneItem() {
+        int songIndex = new Random().nextInt((ringtoneItemList.size() - 1) + 1);
+        return ringtoneItemList.get(songIndex);
     }
 
     public boolean isFirst(RingtoneItem currentRingtoneItem) {
