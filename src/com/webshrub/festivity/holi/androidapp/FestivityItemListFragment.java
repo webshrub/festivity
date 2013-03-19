@@ -36,7 +36,7 @@ public class FestivityItemListFragment<T extends FestivityItem> extends Sherlock
     public void onListItemClick(ListView l, View v, int position, long id) {
         Intent intent = new Intent();
         intent.setClass(getActivity(), FestivityItemDetailsActivity.class);
-        intent.putExtra(FestivityConstants.FESTIVITY_ITEM_KEY, (FestivityItem) getListAdapter().getItem(position));
+        intent.putExtra(FestivityConstants.FESTIVITY_ITEM, (FestivityItem) getListAdapter().getItem(position));
         startActivity(intent);
     }
 

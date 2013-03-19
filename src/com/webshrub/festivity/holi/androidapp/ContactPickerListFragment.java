@@ -63,7 +63,7 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.send:
-                MessageItem messageItem = (MessageItem) getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM_KEY);
+                MessageItem messageItem = (MessageItem) getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM);
                 SparseBooleanArray checked = getListView().getCheckedItemPositions();
                 List<Contact> contactList = new ArrayList<Contact>();
                 for (int position = 0; position < getListView().getCount(); position++) {

@@ -19,15 +19,12 @@ public class FestivityItemDetailsActivity<T extends FestivityItem> extends Sherl
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         FestivityItemDetailsFragment detailsFragment = null;
-        FestivityItem item = getIntent().getExtras().getParcelable(FestivityConstants.FESTIVITY_ITEM_KEY);
+        FestivityItem item = getIntent().getExtras().getParcelable(FestivityConstants.FESTIVITY_ITEM);
         if (item instanceof MessageItem) {
             detailsFragment = new MessageItemDetailsFragment();
             detailsFragment.setArguments(getIntent().getExtras());
         } else if (item instanceof RingtoneItem) {
             detailsFragment = new RingtoneItemDetailsFragment();
-            detailsFragment.setArguments(getIntent().getExtras());
-        } else if (item instanceof WallpaperItem) {
-            detailsFragment = new WallpaperItemDetailsFragment();
             detailsFragment.setArguments(getIntent().getExtras());
         }
         getSupportFragmentManager().beginTransaction().add(android.R.id.content, detailsFragment).commit();

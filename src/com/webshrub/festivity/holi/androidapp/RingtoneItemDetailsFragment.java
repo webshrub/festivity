@@ -58,7 +58,7 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
                 handler.postDelayed(this, 100);
             }
         };
-        currentSong = getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM_KEY);
+        currentSong = getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM);
         songManager = RingtoneItemManager.getInstance();
         playSong(currentSong);
     }

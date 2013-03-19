@@ -66,7 +66,7 @@ public class WallpaperItemDetailsFragment extends FestivityItemDetailsFragment<R
         int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getActivity().getResources().getDisplayMetrics());
         text.setPadding(padding, padding, padding, padding);
         scroller.addView(text);
-        text.setText(((WallpaperItem) getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM_KEY)).getDetails());
+        text.setText(((WallpaperItem) getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM)).getDetails());
         return scroller;
     }
 }
