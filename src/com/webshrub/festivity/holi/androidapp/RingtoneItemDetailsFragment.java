@@ -1,5 +1,6 @@
 package com.webshrub.festivity.holi.androidapp;
 
+import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -59,7 +60,7 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
             }
         };
         currentSong = getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM);
-        songManager = RingtoneItemManager.getInstance();
+        songManager = new RingtoneItemManager(getSherlockActivity());
         playSong(currentSong);
     }
 
@@ -115,7 +116,9 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
     public void playSong(RingtoneItem currentSong) {
         try {
             mediaPlayer.reset();
-            mediaPlayer.setDataSource(currentSong.getDetails());
+            AssetFileDescriptor assetFileDescriptor = getSherlockActivity().getAssets().openFd(currentSong.getDetails());
+            mediaPlayer.setDataSource(assetFileDescriptor.getFileDescriptor(), assetFileDescriptor.getStartOffset(), assetFileDescriptor.getLength());
+            assetFileDescriptor.close();
             mediaPlayer.prepare();
             mediaPlayer.start();
             songTitle.setText(currentSong.getTeaser());

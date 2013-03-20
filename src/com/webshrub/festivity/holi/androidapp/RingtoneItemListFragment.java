@@ -15,7 +15,7 @@ public class RingtoneItemListFragment extends FestivityItemListFragment<Ringtone
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         resourceLayoutId = android.R.layout.simple_list_item_1;
-        List<RingtoneItem> ringtoneItemList = RingtoneItemManager.getInstance().getRingtoneItemList();
+        List<RingtoneItem> ringtoneItemList = new RingtoneItemManager(getSherlockActivity()).getRingtoneItemList();
         data = ringtoneItemList.toArray(new RingtoneItem[ringtoneItemList.size()]);
         super.onActivityCreated(savedInstanceState);
     }

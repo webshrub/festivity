@@ -1,31 +1,29 @@
 package com.webshrub.festivity.holi.androidapp;
 
-import java.io.File;
-import java.io.FilenameFilter;
+import android.content.Context;
+import android.content.res.AssetManager;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class RingtoneItemManager {
-    private static final RingtoneItemManager INSTANCE = new RingtoneItemManager();
     private List<RingtoneItem> ringtoneItemList;
 
-    private RingtoneItemManager() {
-        ringtoneItemList = new ArrayList<RingtoneItem>();
-        File ringtoneMediaDir = new File(FestivityConstants.RINGTONE_MEDIA_DIR);
-        if (ringtoneMediaDir.listFiles(new RingtoneItemExtensionFilter()).length > 0) {
-            File[] files = ringtoneMediaDir.listFiles(new RingtoneItemExtensionFilter());
-            for (int i = 0; i < files.length; i++) {
-                File file = files[i];
-                String ringtoneName = file.getName().substring(0, (file.getName().length() - 4));
-                String ringtonePath = file.getPath();
-                ringtoneItemList.add(new RingtoneItem(i, ringtoneName, ringtonePath));
+    public RingtoneItemManager(Context context) {
+        try {
+            AssetManager assetManager = context.getAssets();
+            String[] ringtoneNames = assetManager.list(FestivityConstants.RINGTONE_DIR);
+            ringtoneItemList = new ArrayList<RingtoneItem>(ringtoneNames.length);
+            for (int i = 0; i < ringtoneNames.length; i++) {
+                String ringtoneName = ringtoneNames[i].substring(0, ringtoneNames[i].length() - 4);
+                String ringtoneUri = FestivityConstants.RINGTONE_DIR + "/" + ringtoneNames[i];
+                ringtoneItemList.add(new RingtoneItem(i, ringtoneName, ringtoneUri));
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    }
-
-    public static RingtoneItemManager getInstance() {
-        return INSTANCE;
     }
 
     public List<RingtoneItem> getRingtoneItemList() {
@@ -52,11 +50,5 @@ public class RingtoneItemManager {
     public RingtoneItem getRandomRingtoneItem() {
         int songIndex = new Random().nextInt((ringtoneItemList.size() - 1) + 1);
         return ringtoneItemList.get(songIndex);
-    }
-
-    private class RingtoneItemExtensionFilter implements FilenameFilter {
-        public boolean accept(File dir, String name) {
-            return (name.endsWith(".mp3") || name.endsWith(".MP3"));
-        }
     }
 }
