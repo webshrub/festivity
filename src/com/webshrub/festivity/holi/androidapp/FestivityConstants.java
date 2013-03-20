@@ -8,7 +8,8 @@ package com.webshrub.festivity.holi.androidapp;
  */
 public class FestivityConstants {
     public static final String FESTIVITY_ITEM = "FESTIVITY_ITEM";
-    public static final String RINGTONE_MEDIA_DIR = "/storage/sdcard0/Music/Dhokha/";
-    public static final String WALLPAPERS_DIR = "wallpapers";
+    public static final String RINGTONE_DIR = "ringtone";
+    public static final String WALLPAPER_DIR = "wallpaper";
+    public static final String SMS_DIR = "sms";
     public static final boolean DEVELOPER_MODE = true;
 }
