@@ -1,7 +1,8 @@
 package com.webshrub.festivity.holi.androidapp;
 
-import android.R;
 import android.os.Bundle;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,14 +14,9 @@ public class MessageItemListFragment extends FestivityItemListFragment<MessageIt
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        resourceLayoutId = R.layout.simple_list_item_1;
-        data = new MessageItem[Shakespeare.TITLES.length];
-        String[] titles = Shakespeare.TITLES;
-        for (int i = 0, titlesLength = titles.length; i < titlesLength; i++) {
-            String title = titles[i];
-            String details = Shakespeare.DIALOGUE[i];
-            data[i] = new MessageItem(i, title, details);
-        }
+        resourceLayoutId = android.R.layout.simple_list_item_1;
+        List<MessageItem> messageItemList = new MessageItemManager(getSherlockActivity()).getMessageItemList();
+        data = messageItemList.toArray(new MessageItem[messageItemList.size()]);
         super.onActivityCreated(savedInstanceState);
     }
 }

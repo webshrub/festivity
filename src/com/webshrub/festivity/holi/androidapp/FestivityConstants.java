@@ -10,6 +10,6 @@ public class FestivityConstants {
     public static final String FESTIVITY_ITEM = "FESTIVITY_ITEM";
     public static final String RINGTONE_DIR = "ringtone";
     public static final String WALLPAPER_DIR = "wallpaper";
-    public static final String SMS_DIR = "sms";
+    public static final String MESSAGE_DIR = "message";
     public static final boolean DEVELOPER_MODE = true;
 }
