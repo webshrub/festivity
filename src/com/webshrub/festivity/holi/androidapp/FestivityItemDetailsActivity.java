@@ -26,6 +26,9 @@ public class FestivityItemDetailsActivity<T extends FestivityItem> extends Sherl
         } else if (item instanceof RingtoneItem) {
             detailsFragment = new RingtoneItemDetailsFragment();
             detailsFragment.setArguments(getIntent().getExtras());
+        } else if (item instanceof WallpaperItem) {
+            detailsFragment = new WallpaperItemDetailsFragment();
+            detailsFragment.setArguments(getIntent().getExtras());
         }
         getSupportFragmentManager().beginTransaction().add(android.R.id.content, detailsFragment).commit();
     }

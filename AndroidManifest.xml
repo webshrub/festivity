@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
     <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
     <application android:name=".FestivityApplication" android:hardwareAccelerated="true" android:label="@string/application_name"
                  android:icon="@drawable/ic_launcher" android:theme="@style/Theme.AndroidDevelopers">
@@ -35,6 +36,5 @@
             </intent-filter>
         </activity>
         <activity android:label="@string/application_name" android:name="com.webshrub.festivity.holi.androidapp.FestivityItemDetailsActivity"/>
-        <activity android:name=".WallpaperItemDetailsActivity" android:label="@string/application_name"/>
     </application>
 </manifest>

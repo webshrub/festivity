@@ -33,7 +33,7 @@ public class WallpaperItemListFragment extends SherlockFragment {
     private class WallpaperItemOnClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(getSherlockActivity(), WallpaperItemDetailsActivity.class);
+            Intent intent = new Intent(getSherlockActivity(), FestivityItemDetailsActivity.class);
             intent.putExtra(FestivityConstants.FESTIVITY_ITEM, (WallpaperItem) wallpaperItemListAdapter.getItem(position));
             startActivity(intent);
         }
