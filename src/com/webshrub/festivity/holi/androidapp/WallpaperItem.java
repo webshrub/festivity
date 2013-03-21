@@ -13,14 +13,16 @@ public class WallpaperItem implements FestivityItem {
     private int id;
     private String teaser;
     private String details;
+    private String assetUri;
 
     public WallpaperItem() {
     }
 
-    public WallpaperItem(int id, String teaser, String details) {
+    public WallpaperItem(int id, String teaser, String details, String assetUri) {
         this.id = id;
         this.teaser = teaser;
         this.details = details;
+        this.assetUri = assetUri;
     }
 
     public WallpaperItem(Parcel in) {
@@ -51,6 +53,14 @@ public class WallpaperItem implements FestivityItem {
         this.details = details;
     }
 
+    public String getAssetUri() {
+        return assetUri;
+    }
+
+    public void setAssetUri(String assetUri) {
+        this.assetUri = assetUri;
+    }
+
     @Override
     public String toString() {
         return teaser;
@@ -66,12 +76,14 @@ public class WallpaperItem implements FestivityItem {
         dest.writeInt(id);
         dest.writeString(teaser);
         dest.writeString(details);
+        dest.writeString(assetUri);
     }
 
     private void readFromParcel(Parcel in) {
         id = in.readInt();
         teaser = in.readString();
         details = in.readString();
+        assetUri = in.readString();
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

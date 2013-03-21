@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
@@ -22,11 +23,16 @@ import java.io.File;
  * Time: 2:40 PM
  */
 public class WallpaperItemDetailsFragment extends FestivityItemDetailsFragment<WallpaperItem> {
+    private WallpaperItemManager wallpaperItemManager;
+    private ViewPager viewPager;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
+        wallpaperItemManager = new WallpaperItemManager(getSherlockActivity());
+        int pagerPosition = ((WallpaperItem) getSherlockActivity().getIntent().getExtras().getParcelable(FestivityConstants.FESTIVITY_ITEM)).getId();
+        viewPager.setCurrentItem(pagerPosition);
     }
 
     @Override
@@ -39,6 +45,10 @@ public class WallpaperItemDetailsFragment extends FestivityItemDetailsFragment<W
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_set_wallpaper:
+                int currentPosition = viewPager.getCurrentItem();
+                WallpaperItem currentWallpaperItem = wallpaperItemManager.getWallpaperItemAt(currentPosition);
+                wallpaperItemManager.setWallpaper(currentWallpaperItem);
+                Toast.makeText(getSherlockActivity(), "Wallpaper set successfully.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_share_wallpaper:
                 String path = "/mnt/sdcard/dir1/sample_1.jpg";
@@ -61,10 +71,8 @@ public class WallpaperItemDetailsFragment extends FestivityItemDetailsFragment<W
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.ac_image_pager, container, false);
-        ViewPager pager = (ViewPager) view.findViewById(R.id.pager);
-        pager.setAdapter(new WallpaperItemPagerAdapter(getSherlockActivity()));
-        int pagerPosition = ((WallpaperItem) getSherlockActivity().getIntent().getExtras().getParcelable(FestivityConstants.FESTIVITY_ITEM)).getId();
-        pager.setCurrentItem(pagerPosition);
+        viewPager = (ViewPager) view.findViewById(R.id.pager);
+        viewPager.setAdapter(new WallpaperItemPagerAdapter(getSherlockActivity()));
         return view;
     }
 }

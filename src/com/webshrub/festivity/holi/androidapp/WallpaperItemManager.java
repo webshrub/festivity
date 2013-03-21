@@ -26,8 +26,9 @@ public class WallpaperItemManager {
             String[] wallpaperNames = assetManager.list(FestivityConstants.WALLPAPER_ASSETS_DIR);
             wallpaperItemList = new ArrayList<WallpaperItem>(wallpaperNames.length);
             for (int i = 0, fileNamesLength = wallpaperNames.length; i < fileNamesLength; i++) {
-                String wallpaperUri = "assets://" + FestivityConstants.WALLPAPER_ASSETS_DIR + "/" + wallpaperNames[i];
-                wallpaperItemList.add(new WallpaperItem(i, wallpaperNames[i], wallpaperUri));
+                String wallpaperUri = FestivityConstants.WALLPAPER_ASSETS_DIR + "/" + wallpaperNames[i];
+                String wallpaperAssetUri = "assets://" + FestivityConstants.WALLPAPER_ASSETS_DIR + "/" + wallpaperNames[i];
+                wallpaperItemList.add(new WallpaperItem(i, wallpaperNames[i], wallpaperUri, wallpaperAssetUri));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,7 +59,7 @@ public class WallpaperItemManager {
         if (externalStoragePresent) {
             File folder = new File(Environment.getExternalStorageDirectory().toString() + "/" + FestivityConstants.WALLPAPER_STORAGE_DIR);
             folder.mkdirs();
-            String fileName = currentWallpaperItem.getTeaser() + FestivityConstants.WALLPAPER_EXTENSION;
+            String fileName = currentWallpaperItem.getTeaser();
             File destinationFile = new File(folder, fileName);
             byte[] buffer = new byte[1024];
             AssetFileDescriptor sourceFileDescriptor = context.getAssets().openFd(currentWallpaperItem.getDetails());

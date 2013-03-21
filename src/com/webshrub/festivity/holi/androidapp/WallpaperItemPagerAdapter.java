@@ -60,7 +60,7 @@ class WallpaperItemPagerAdapter extends PagerAdapter {
         View imageLayout = ((Activity) context).getLayoutInflater().inflate(R.layout.item_pager_image, view, false);
         ImageView imageView = (ImageView) imageLayout.findViewById(R.id.image);
         ProgressBar spinner = (ProgressBar) imageLayout.findViewById(R.id.loading);
-        ImageLoader.getInstance().displayImage(wallpaperItemManager.getWallpaperItemAt(position).getDetails(), imageView, options, new WallpaperItemLoadingListener(spinner));
+        ImageLoader.getInstance().displayImage(wallpaperItemManager.getWallpaperItemAt(position).getAssetUri(), imageView, options, new WallpaperItemLoadingListener(spinner));
         view.addView(imageLayout, 0);
         return imageLayout;
     }
