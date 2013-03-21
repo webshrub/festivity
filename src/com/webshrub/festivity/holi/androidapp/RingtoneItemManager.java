@@ -65,23 +65,23 @@ public class RingtoneItemManager {
 
     public void setRingtone(RingtoneItem currentRingtoneItem) {
         try {
-            File newRingtoneFile = copyRingtoneToStorage(currentRingtoneItem);
+            File copiedRingtoneFile = copyRingtoneToStorage(currentRingtoneItem);
 
-            Uri newRingtoneUri = MediaStore.Audio.Media.getContentUriForPath(newRingtoneFile.getAbsolutePath());
-            context.getContentResolver().delete(newRingtoneUri, MediaStore.MediaColumns.DATA + "=\"" + newRingtoneFile.getAbsolutePath() + "\"", null);
+            Uri newRingtoneUri = MediaStore.Audio.Media.getContentUriForPath(copiedRingtoneFile.getAbsolutePath());
+            context.getContentResolver().delete(newRingtoneUri, MediaStore.MediaColumns.DATA + "=\"" + copiedRingtoneFile.getAbsolutePath() + "\"", null);
 
             ContentValues values = new ContentValues();
-            values.put(MediaStore.MediaColumns.DATA, newRingtoneFile.getAbsolutePath());
+            values.put(MediaStore.MediaColumns.DATA, copiedRingtoneFile.getAbsolutePath());
             values.put(MediaStore.MediaColumns.TITLE, currentRingtoneItem.getTeaser());
             values.put(MediaStore.MediaColumns.MIME_TYPE, FestivityConstants.RINGTONE_MIME_TYPE);
-            values.put(MediaStore.MediaColumns.SIZE, newRingtoneFile.length());
+            values.put(MediaStore.MediaColumns.SIZE, copiedRingtoneFile.length());
             values.put(MediaStore.Audio.Media.ARTIST, currentRingtoneItem.getTeaser());
             values.put(MediaStore.Audio.Media.IS_RINGTONE, true);
             values.put(MediaStore.Audio.Media.IS_NOTIFICATION, false);
             values.put(MediaStore.Audio.Media.IS_ALARM, false);
             values.put(MediaStore.Audio.Media.IS_MUSIC, false);
 
-            Uri uriToInsertValues = MediaStore.Audio.Media.getContentUriForPath(newRingtoneFile.getAbsolutePath());
+            Uri uriToInsertValues = MediaStore.Audio.Media.getContentUriForPath(copiedRingtoneFile.getAbsolutePath());
             Uri actualDefaultRingtoneUri = context.getContentResolver().insert(uriToInsertValues, values);
 
             RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_RINGTONE, actualDefaultRingtoneUri);
