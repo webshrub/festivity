@@ -14,11 +14,11 @@ public class RingtoneItemManager {
     public RingtoneItemManager(Context context) {
         try {
             AssetManager assetManager = context.getAssets();
-            String[] ringtoneNames = assetManager.list(FestivityConstants.RINGTONE_DIR);
+            String[] ringtoneNames = assetManager.list(FestivityConstants.RINGTONE_ASSETS_DIR);
             ringtoneItemList = new ArrayList<RingtoneItem>(ringtoneNames.length);
             for (int i = 0; i < ringtoneNames.length; i++) {
                 String ringtoneName = ringtoneNames[i].substring(0, ringtoneNames[i].length() - 4);
-                String ringtoneUri = FestivityConstants.RINGTONE_DIR + "/" + ringtoneNames[i];
+                String ringtoneUri = FestivityConstants.RINGTONE_ASSETS_DIR + "/" + ringtoneNames[i];
                 ringtoneItemList.add(new RingtoneItem(i, ringtoneName, ringtoneUri));
             }
         } catch (IOException e) {

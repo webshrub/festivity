@@ -13,10 +13,10 @@ public class WallpaperItemManager {
     public WallpaperItemManager(Context context) {
         try {
             AssetManager assetManager = context.getAssets();
-            String[] wallpaperNames = assetManager.list(FestivityConstants.WALLPAPER_DIR);
+            String[] wallpaperNames = assetManager.list(FestivityConstants.WALLPAPER_ASSETS_DIR);
             wallpaperItemList = new ArrayList<WallpaperItem>(wallpaperNames.length);
             for (int i = 0, fileNamesLength = wallpaperNames.length; i < fileNamesLength; i++) {
-                String wallpaperUri = "assets://" + FestivityConstants.WALLPAPER_DIR + "/" + wallpaperNames[i];
+                String wallpaperUri = "assets://" + FestivityConstants.WALLPAPER_ASSETS_DIR + "/" + wallpaperNames[i];
                 wallpaperItemList.add(new WallpaperItem(i, wallpaperNames[i], wallpaperUri));
             }
         } catch (IOException e) {

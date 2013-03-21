@@ -13,11 +13,11 @@ public class MessageItemManager {
     public MessageItemManager(Context context) {
         try {
             AssetManager assetManager = context.getAssets();
-            String[] messageNames = assetManager.list(FestivityConstants.MESSAGE_DIR);
+            String[] messageNames = assetManager.list(FestivityConstants.MESSAGE_ASSETS_DIR);
             messageItemList = new ArrayList<MessageItem>(messageNames.length);
             for (int i = 0; i < messageNames.length; i++) {
                 String messageName = messageNames[i].substring(0, messageNames[i].length() - 4);
-                String messageUri = FestivityConstants.MESSAGE_DIR + "/" + messageNames[i];
+                String messageUri = FestivityConstants.MESSAGE_ASSETS_DIR + "/" + messageNames[i];
                 messageItemList.add(new MessageItem(i, messageName, messageUri));
             }
         } catch (IOException e) {
