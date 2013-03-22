@@ -9,6 +9,7 @@ import android.net.Uri;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,7 +52,14 @@ public class FestivityContentProvider extends ContentProvider {
     @Override
     public AssetFileDescriptor openAssetFile(Uri uri, String mode) throws FileNotFoundException {
         AssetManager assetManager = getContext().getAssets();
-        String fileName = FestivityConstants.WALLPAPER_ASSETS_DIR + "/" + uri.getLastPathSegment();
+        List<String> pathSegments = uri.getPathSegments();
+        String assetFolder = pathSegments.get(0);
+        String fileName = pathSegments.get(1);
+        if (assetFolder.equalsIgnoreCase(FestivityConstants.RINGTONE_ASSETS_DIR)) {
+            fileName = FestivityConstants.RINGTONE_ASSETS_DIR + "/" + uri.getLastPathSegment();
+        } else if (assetFolder.equalsIgnoreCase(FestivityConstants.WALLPAPER_ASSETS_DIR)) {
+            fileName = FestivityConstants.WALLPAPER_ASSETS_DIR + "/" + uri.getLastPathSegment();
+        }
         AssetFileDescriptor assetFileDescriptor = null;
         try {
             assetFileDescriptor = assetManager.openFd(fileName);
