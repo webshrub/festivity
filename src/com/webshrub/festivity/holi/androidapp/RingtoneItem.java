@@ -12,14 +12,16 @@ import android.os.Parcelable;
 public class RingtoneItem implements FestivityItem {
     private int id;
     private String name;
+    private String nameWithExtension;
     private String assetUri;
 
     public RingtoneItem() {
     }
 
-    public RingtoneItem(int id, String name, String assetUri) {
+    public RingtoneItem(int id, String name, String nameWithExtension, String assetUri) {
         this.id = id;
         this.name = name;
+        this.nameWithExtension = nameWithExtension;
         this.assetUri = assetUri;
     }
 
@@ -41,6 +43,14 @@ public class RingtoneItem implements FestivityItem {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNameWithExtension() {
+        return nameWithExtension;
+    }
+
+    public void setNameWithExtension(String nameWithExtension) {
+        this.nameWithExtension = nameWithExtension;
     }
 
     public String getAssetUri() {
@@ -65,12 +75,14 @@ public class RingtoneItem implements FestivityItem {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(name);
+        dest.writeString(nameWithExtension);
         dest.writeString(assetUri);
     }
 
     private void readFromParcel(Parcel in) {
         id = in.readInt();
         name = in.readString();
+        nameWithExtension = in.readString();
         assetUri = in.readString();
     }
 

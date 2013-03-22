@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Environment;
 import android.widget.Toast;
 
+import java.io.File;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Ahsan.Javed
@@ -11,16 +13,6 @@ import android.widget.Toast;
  * Time: 4:55 PM
  */
 public class FestivityUtility {
-    private static final FestivityUtility INSTANCE = new FestivityUtility();
-
-    private FestivityUtility() {
-
-    }
-
-    public static FestivityUtility getInstance() {
-        return INSTANCE;
-    }
-
     public static String milliSecondsToTimer(long milliseconds) {
         String finalTimerString = "";
         String secondsString;
@@ -44,13 +36,6 @@ public class FestivityUtility {
         return finalTimerString;
     }
 
-    /**
-     * Function to get Progress percentage
-     *
-     * @param currentDuration currentDuration
-     * @param totalDuration   totalDuration
-     * @return progressPercentage
-     */
     public static int getProgressPercentage(long currentDuration, long totalDuration) {
         Double percentage;
         long currentSeconds = (int) (currentDuration / 1000);
@@ -61,13 +46,6 @@ public class FestivityUtility {
         return percentage.intValue();
     }
 
-    /**
-     * Function to change progress to timer
-     *
-     * @param progress      -
-     * @param totalDuration returns current duration in milliseconds
-     * @return progressToTimer
-     */
     public static int progressToTimer(int progress, int totalDuration) {
         int currentDuration;
         totalDuration = totalDuration / 1000;
@@ -76,7 +54,7 @@ public class FestivityUtility {
         return currentDuration * 1000;
     }
 
-    public boolean isExternalStoragePresent(Context context) {
+    public static boolean isExternalStoragePresent(Context context) {
         boolean externalStorageAvailable;
         boolean externalStorageWritable;
         String state = Environment.getExternalStorageState();
@@ -95,5 +73,24 @@ public class FestivityUtility {
             Toast.makeText(context, "SD card not present", Toast.LENGTH_LONG).show();
         }
         return (externalStorageAvailable) && (externalStorageWritable);
+    }
+
+    public static String stripExtension(String inputString) {
+        int lastIndex = inputString.lastIndexOf(".");
+        if (lastIndex < 0) {
+            return inputString;
+        }
+        int fileSeparatorLastIndex = inputString.lastIndexOf(File.separator);
+        if (fileSeparatorLastIndex < 0 && lastIndex == 0) {
+            return inputString;
+        }
+        if (fileSeparatorLastIndex >= 0 && fileSeparatorLastIndex > lastIndex) {
+            return inputString;
+        }
+        return inputString.substring(0, lastIndex);
+    }
+
+    public static String getExtension(String inputString) {
+        return inputString.substring(inputString.lastIndexOf("."));
     }
 }

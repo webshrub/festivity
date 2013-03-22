@@ -30,9 +30,10 @@ public class RingtoneItemManager {
             String[] ringtoneNames = assetManager.list(FestivityConstants.RINGTONE_ASSETS_DIR);
             ringtoneItemList = new ArrayList<RingtoneItem>(ringtoneNames.length);
             for (int i = 0; i < ringtoneNames.length; i++) {
-                String name = ringtoneNames[i].substring(0, ringtoneNames[i].length() - 4);
+                String name = FestivityUtility.stripExtension(ringtoneNames[i]);
+                String nameWithExtension = ringtoneNames[i];
                 String assetUri = FestivityConstants.RINGTONE_ASSETS_DIR + "/" + ringtoneNames[i];
-                ringtoneItemList.add(new RingtoneItem(i, name, assetUri));
+                ringtoneItemList.add(new RingtoneItem(i, name, nameWithExtension, assetUri));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -75,7 +76,7 @@ public class RingtoneItemManager {
             ContentValues values = new ContentValues();
             values.put(MediaStore.MediaColumns.DATA, copiedRingtoneFile.getAbsolutePath());
             values.put(MediaStore.MediaColumns.TITLE, currentRingtoneItem.getName());
-            values.put(MediaStore.MediaColumns.MIME_TYPE, FestivityConstants.RINGTONE_MIME_TYPE);
+            values.put(MediaStore.MediaColumns.MIME_TYPE, MimeTypeMap.getSingleton().getMimeTypeFromExtension(FestivityUtility.getExtension(currentRingtoneItem.getNameWithExtension())));
             values.put(MediaStore.MediaColumns.SIZE, copiedRingtoneFile.length());
             values.put(MediaStore.Audio.Media.ARTIST, currentRingtoneItem.getName());
             values.put(MediaStore.Audio.Media.IS_RINGTONE, true);
@@ -93,11 +94,11 @@ public class RingtoneItemManager {
     }
 
     public File copyRingtoneToStorage(RingtoneItem currentRingtoneItem) throws IOException {
-        boolean externalStoragePresent = FestivityUtility.getInstance().isExternalStoragePresent(context);
+        boolean externalStoragePresent = FestivityUtility.isExternalStoragePresent(context);
         if (externalStoragePresent) {
             File folder = new File(Environment.getExternalStorageDirectory().toString() + "/" + FestivityConstants.RINGTONE_STORAGE_DIR);
             folder.mkdirs();
-            String fileName = currentRingtoneItem.getName() + FestivityConstants.RINGTONE_EXTENSION;
+            String fileName = currentRingtoneItem.getNameWithExtension();
             File destinationFile = new File(folder, fileName);
             byte[] buffer = new byte[1024];
             AssetFileDescriptor sourceFileDescriptor = context.getAssets().openFd(currentRingtoneItem.getAssetUri());

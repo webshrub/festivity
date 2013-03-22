@@ -59,7 +59,7 @@ public class WallpaperItemManager {
     }
 
     public File copyWallpaperToStorage(WallpaperItem currentWallpaperItem) throws IOException {
-        boolean externalStoragePresent = FestivityUtility.getInstance().isExternalStoragePresent(context);
+        boolean externalStoragePresent = FestivityUtility.isExternalStoragePresent(context);
         if (externalStoragePresent) {
             File folder = new File(Environment.getExternalStorageDirectory().toString() + "/" + FestivityConstants.WALLPAPER_STORAGE_DIR);
             folder.mkdirs();
