@@ -17,4 +17,5 @@ public class FestivityConstants {
     public static final String RINGTONE_EXTENSION = ".mp3";
     public static final String WALLPAPER_EXTENSION = ".jpg";
     public static final boolean DEVELOPER_MODE = true;
+    public static final String FESTIVITY_CONTENT_PROVIDER_AUTHORITY = "content://com.webshrub.festivity.holi.androidapp/";
 }

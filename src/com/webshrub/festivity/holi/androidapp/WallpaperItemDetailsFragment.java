@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,6 @@ import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-
-import java.io.File;
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,16 +48,16 @@ public class WallpaperItemDetailsFragment extends FestivityItemDetailsFragment<W
                 Toast.makeText(getSherlockActivity(), "Wallpaper set successfully.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_share_wallpaper:
-                String path = "/mnt/sdcard/dir1/sample_1.jpg";
-                Intent share = new Intent(Intent.ACTION_SEND);
-                MimeTypeMap map = MimeTypeMap.getSingleton(); //mapping from extension to mimetype
-                String ext = path.substring(path.lastIndexOf('.') + 1);
-                String mime = map.getMimeTypeFromExtension(ext);
-                share.setType(mime); // might be text, sound, whatever
-                Uri uri = Uri.fromFile(new File(path));
-                share.putExtra(Intent.EXTRA_STREAM, uri);//using a string here didnt work for me
-                Log.d(FestivityItemDetailsActivity.TAG, "share " + uri + " ext:" + ext + " mime:" + mime);
-                startActivity(Intent.createChooser(share, "share"));
+                currentPosition = viewPager.getCurrentItem();
+                currentWallpaperItem = wallpaperItemManager.getWallpaperItemAt(currentPosition);
+                Uri wallpaperUri = Uri.parse(FestivityConstants.FESTIVITY_CONTENT_PROVIDER_AUTHORITY + currentWallpaperItem.getDetails());
+                String extension = currentWallpaperItem.getDetails().substring(currentWallpaperItem.getDetails().lastIndexOf('.') + 1);
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType(MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension));
+                shareIntent.putExtra(Intent.EXTRA_STREAM, wallpaperUri);
+                shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject for message");
+                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Body for message");
+                startActivity(shareIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

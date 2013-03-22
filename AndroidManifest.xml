@@ -36,5 +36,6 @@
             </intent-filter>
         </activity>
         <activity android:label="@string/application_name" android:name="com.webshrub.festivity.holi.androidapp.FestivityItemDetailsActivity"/>
+        <provider android:name="com.webshrub.festivity.holi.androidapp.FestivityContentProvider" android:authorities="com.webshrub.festivity.holi.androidapp"/>
     </application>
 </manifest>
