@@ -3,10 +3,12 @@ package com.webshrub.festivity.holi.androidapp;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.telephony.SmsManager;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MessageItemSenderTask extends AsyncTask<Contact, Integer, Void> {
@@ -38,10 +40,17 @@ public class MessageItemSenderTask extends AsyncTask<Contact, Integer, Void> {
 
     @Override
     protected Void doInBackground(Contact... contacts) {
-        for (int count = 0; count < contacts.length; count++) {
-            Contact contact = contacts[count];
-            sendSMS(contact.getNumber(), messageItem.getAssetUri());
-            saveSentSms(contact.getNumber(), messageItem.getAssetUri());
+        try {
+            AssetManager assetManager = context.getAssets();
+            InputStream inputStream = assetManager.open(messageItem.getAssetUri());
+            byte[] buffer = new byte[inputStream.available()];
+            inputStream.read(buffer);
+            inputStream.close();
+            String message = new String(buffer);
+            for (int count = 0; count < contacts.length; count++) {
+                Contact contact = contacts[count];
+                sendSMS(contact.getNumber(), message);
+                saveSentSms(contact.getNumber(), message);
 //            sendSMS("9810572052", messageItem.getDetails());
 //            saveSentSms("9810572052", messageItem.getDetails());
 //            try {
@@ -49,7 +58,10 @@ public class MessageItemSenderTask extends AsyncTask<Contact, Integer, Void> {
 //            } catch (InterruptedException e) {
 //                e.printStackTrace();
 //            }
-            publishProgress(count + 1, contacts.length);
+                publishProgress(count + 1, contacts.length);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
