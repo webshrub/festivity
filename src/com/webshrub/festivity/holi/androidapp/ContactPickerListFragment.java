@@ -88,7 +88,6 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
         if (mActionMode == null) {
             mActionMode = getSherlockActivity().startActionMode(new ContactPickerMultiChoiceModeListener());
         }
-        Toast.makeText(getActivity(), "Item clicked: " + id, Toast.LENGTH_LONG).show();
     }
 
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
