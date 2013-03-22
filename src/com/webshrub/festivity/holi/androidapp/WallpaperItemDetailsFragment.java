@@ -55,8 +55,8 @@ public class WallpaperItemDetailsFragment extends FestivityItemDetailsFragment<W
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType(MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension));
                 shareIntent.putExtra(Intent.EXTRA_STREAM, wallpaperUri);
-                shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject for message");
-                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Body for message");
+                shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, currentWallpaperItem.getTeaser());
+                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, currentWallpaperItem.getTeaser());
                 startActivity(shareIntent);
                 return true;
             default:
