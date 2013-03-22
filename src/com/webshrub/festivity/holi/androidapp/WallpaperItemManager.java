@@ -2,11 +2,14 @@ package com.webshrub.festivity.holi.androidapp;
 
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Environment;
+import android.webkit.MimeTypeMap;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -74,5 +77,16 @@ public class WallpaperItemManager {
             return destinationFile;
         }
         return null;
+    }
+
+    public void shareWallpaper(WallpaperItem currentWallpaperItem) {
+        Uri wallpaperUri = Uri.parse(FestivityConstants.FESTIVITY_CONTENT_PROVIDER_AUTHORITY + currentWallpaperItem.getDetails());
+        String extension = currentWallpaperItem.getDetails().substring(currentWallpaperItem.getDetails().lastIndexOf('.') + 1);
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType(MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension));
+        shareIntent.putExtra(Intent.EXTRA_STREAM, wallpaperUri);
+        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, currentWallpaperItem.getTeaser());
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, currentWallpaperItem.getTeaser());
+        context.startActivity(shareIntent);
     }
 }

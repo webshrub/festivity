@@ -1,13 +1,10 @@
 package com.webshrub.festivity.holi.androidapp;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -50,14 +47,7 @@ public class WallpaperItemDetailsFragment extends FestivityItemDetailsFragment<W
             case R.id.menu_share_wallpaper:
                 currentPosition = viewPager.getCurrentItem();
                 currentWallpaperItem = wallpaperItemManager.getWallpaperItemAt(currentPosition);
-                Uri wallpaperUri = Uri.parse(FestivityConstants.FESTIVITY_CONTENT_PROVIDER_AUTHORITY + currentWallpaperItem.getDetails());
-                String extension = currentWallpaperItem.getDetails().substring(currentWallpaperItem.getDetails().lastIndexOf('.') + 1);
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType(MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension));
-                shareIntent.putExtra(Intent.EXTRA_STREAM, wallpaperUri);
-                shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, currentWallpaperItem.getTeaser());
-                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, currentWallpaperItem.getTeaser());
-                startActivity(shareIntent);
+                wallpaperItemManager.shareWallpaper(currentWallpaperItem);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

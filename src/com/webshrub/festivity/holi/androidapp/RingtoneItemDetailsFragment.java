@@ -52,9 +52,9 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
             public void run() {
                 long totalDuration = mediaPlayer.getDuration();
                 long currentDuration = mediaPlayer.getCurrentPosition();
-                songTotalDurationLabel.setText(FestivityUtilities.milliSecondsToTimer(totalDuration));
-                songCurrentDurationLabel.setText(FestivityUtilities.milliSecondsToTimer(currentDuration));
-                int progress = FestivityUtilities.getProgressPercentage(currentDuration, totalDuration);
+                songTotalDurationLabel.setText(FestivityUtility.milliSecondsToTimer(totalDuration));
+                songCurrentDurationLabel.setText(FestivityUtility.milliSecondsToTimer(currentDuration));
+                int progress = FestivityUtility.getProgressPercentage(currentDuration, totalDuration);
                 songProgressBar.setProgress(progress);
                 handler.postDelayed(this, 100);
             }
@@ -78,6 +78,7 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
                 Toast.makeText(getSherlockActivity(), "Ringtone set successfully.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_share_ringtone:
+                songManager.shareRingtone(currentSong);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -154,7 +155,7 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
     public void onStopTrackingTouch(SeekBar seekBar) {
         handler.removeCallbacks(updateTimerTask);
         int totalDuration = mediaPlayer.getDuration();
-        int currentPosition = FestivityUtilities.progressToTimer(seekBar.getProgress(), totalDuration);
+        int currentPosition = FestivityUtility.progressToTimer(seekBar.getProgress(), totalDuration);
         mediaPlayer.seekTo(currentPosition);
         updateProgressBar();
     }

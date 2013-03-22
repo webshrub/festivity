@@ -2,12 +2,14 @@ package com.webshrub.festivity.holi.androidapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.webkit.MimeTypeMap;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -110,5 +112,16 @@ public class RingtoneItemManager {
             return destinationFile;
         }
         return null;
+    }
+
+    public void shareRingtone(RingtoneItem currentRingtoneItem) {
+        Uri ringtoneUri = Uri.parse(FestivityConstants.FESTIVITY_CONTENT_PROVIDER_AUTHORITY + currentRingtoneItem.getDetails());
+        String extension = currentRingtoneItem.getDetails().substring(currentRingtoneItem.getDetails().lastIndexOf('.') + 1);
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType(MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension));
+        shareIntent.putExtra(Intent.EXTRA_STREAM, ringtoneUri);
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, currentRingtoneItem.getTeaser());
+        shareIntent.putExtra(Intent.EXTRA_TEXT, currentRingtoneItem.getTeaser());
+        context.startActivity(shareIntent);
     }
 }
