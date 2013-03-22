@@ -11,16 +11,16 @@ import android.os.Parcelable;
  */
 public class RingtoneItem implements FestivityItem {
     private int id;
-    private String teaser;
-    private String details;
+    private String name;
+    private String assetUri;
 
     public RingtoneItem() {
     }
 
-    public RingtoneItem(int id, String teaser, String details) {
+    public RingtoneItem(int id, String name, String assetUri) {
         this.id = id;
-        this.teaser = teaser;
-        this.details = details;
+        this.name = name;
+        this.assetUri = assetUri;
     }
 
     public RingtoneItem(Parcel in) {
@@ -35,25 +35,25 @@ public class RingtoneItem implements FestivityItem {
         this.id = id;
     }
 
-    public String getTeaser() {
-        return teaser;
+    public String getName() {
+        return name;
     }
 
-    public void setTeaser(String teaser) {
-        this.teaser = teaser;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDetails() {
-        return details;
+    public String getAssetUri() {
+        return assetUri;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
+    public void setAssetUri(String assetUri) {
+        this.assetUri = assetUri;
     }
 
     @Override
     public String toString() {
-        return teaser;
+        return name;
     }
 
     @Override
@@ -64,14 +64,14 @@ public class RingtoneItem implements FestivityItem {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
-        dest.writeString(teaser);
-        dest.writeString(details);
+        dest.writeString(name);
+        dest.writeString(assetUri);
     }
 
     private void readFromParcel(Parcel in) {
         id = in.readInt();
-        teaser = in.readString();
-        details = in.readString();
+        name = in.readString();
+        assetUri = in.readString();
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

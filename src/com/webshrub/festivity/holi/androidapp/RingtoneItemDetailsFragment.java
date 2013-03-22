@@ -119,12 +119,12 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
     public void playSong(RingtoneItem currentSong) {
         try {
             mediaPlayer.reset();
-            AssetFileDescriptor assetFileDescriptor = getSherlockActivity().getAssets().openFd(currentSong.getDetails());
+            AssetFileDescriptor assetFileDescriptor = getSherlockActivity().getAssets().openFd(currentSong.getAssetUri());
             mediaPlayer.setDataSource(assetFileDescriptor.getFileDescriptor(), assetFileDescriptor.getStartOffset(), assetFileDescriptor.getLength());
             assetFileDescriptor.close();
             mediaPlayer.prepare();
             mediaPlayer.start();
-            songTitle.setText(currentSong.getTeaser());
+            songTitle.setText(currentSong.getName());
             btnPlay.setImageResource(R.drawable.btn_pause);
             songProgressBar.setProgress(0);
             songProgressBar.setMax(100);

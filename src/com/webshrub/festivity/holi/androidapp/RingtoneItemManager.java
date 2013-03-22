@@ -30,9 +30,9 @@ public class RingtoneItemManager {
             String[] ringtoneNames = assetManager.list(FestivityConstants.RINGTONE_ASSETS_DIR);
             ringtoneItemList = new ArrayList<RingtoneItem>(ringtoneNames.length);
             for (int i = 0; i < ringtoneNames.length; i++) {
-                String ringtoneName = ringtoneNames[i].substring(0, ringtoneNames[i].length() - 4);
-                String ringtoneUri = FestivityConstants.RINGTONE_ASSETS_DIR + "/" + ringtoneNames[i];
-                ringtoneItemList.add(new RingtoneItem(i, ringtoneName, ringtoneUri));
+                String name = ringtoneNames[i].substring(0, ringtoneNames[i].length() - 4);
+                String assetUri = FestivityConstants.RINGTONE_ASSETS_DIR + "/" + ringtoneNames[i];
+                ringtoneItemList.add(new RingtoneItem(i, name, assetUri));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,10 +74,10 @@ public class RingtoneItemManager {
 
             ContentValues values = new ContentValues();
             values.put(MediaStore.MediaColumns.DATA, copiedRingtoneFile.getAbsolutePath());
-            values.put(MediaStore.MediaColumns.TITLE, currentRingtoneItem.getTeaser());
+            values.put(MediaStore.MediaColumns.TITLE, currentRingtoneItem.getName());
             values.put(MediaStore.MediaColumns.MIME_TYPE, FestivityConstants.RINGTONE_MIME_TYPE);
             values.put(MediaStore.MediaColumns.SIZE, copiedRingtoneFile.length());
-            values.put(MediaStore.Audio.Media.ARTIST, currentRingtoneItem.getTeaser());
+            values.put(MediaStore.Audio.Media.ARTIST, currentRingtoneItem.getName());
             values.put(MediaStore.Audio.Media.IS_RINGTONE, true);
             values.put(MediaStore.Audio.Media.IS_NOTIFICATION, false);
             values.put(MediaStore.Audio.Media.IS_ALARM, false);
@@ -97,10 +97,10 @@ public class RingtoneItemManager {
         if (externalStoragePresent) {
             File folder = new File(Environment.getExternalStorageDirectory().toString() + "/" + FestivityConstants.RINGTONE_STORAGE_DIR);
             folder.mkdirs();
-            String fileName = currentRingtoneItem.getTeaser() + FestivityConstants.RINGTONE_EXTENSION;
+            String fileName = currentRingtoneItem.getName() + FestivityConstants.RINGTONE_EXTENSION;
             File destinationFile = new File(folder, fileName);
             byte[] buffer = new byte[1024];
-            AssetFileDescriptor sourceFileDescriptor = context.getAssets().openFd(currentRingtoneItem.getDetails());
+            AssetFileDescriptor sourceFileDescriptor = context.getAssets().openFd(currentRingtoneItem.getAssetUri());
             FileInputStream inputStream = sourceFileDescriptor.createInputStream();
             FileOutputStream outputStream = new FileOutputStream(destinationFile);
             int i = inputStream.read(buffer);
@@ -115,13 +115,13 @@ public class RingtoneItemManager {
     }
 
     public void shareRingtone(RingtoneItem currentRingtoneItem) {
-        Uri ringtoneUri = Uri.parse(FestivityConstants.FESTIVITY_CONTENT_PROVIDER_AUTHORITY + currentRingtoneItem.getDetails());
-        String extension = currentRingtoneItem.getDetails().substring(currentRingtoneItem.getDetails().lastIndexOf('.') + 1);
+        Uri ringtoneUri = Uri.parse(FestivityConstants.FESTIVITY_CONTENT_PROVIDER_AUTHORITY + currentRingtoneItem.getAssetUri());
+        String extension = currentRingtoneItem.getAssetUri().substring(currentRingtoneItem.getAssetUri().lastIndexOf('.') + 1);
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType(MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension));
         shareIntent.putExtra(Intent.EXTRA_STREAM, ringtoneUri);
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, currentRingtoneItem.getTeaser());
-        shareIntent.putExtra(Intent.EXTRA_TEXT, currentRingtoneItem.getTeaser());
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, currentRingtoneItem.getName());
+        shareIntent.putExtra(Intent.EXTRA_TEXT, currentRingtoneItem.getName());
         context.startActivity(shareIntent);
     }
 }

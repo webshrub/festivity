@@ -57,7 +57,7 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
         scroller.addView(text);
         try {
             AssetManager assetManager = getSherlockActivity().getAssets();
-            InputStream inputStream = assetManager.open(((MessageItem) getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM)).getDetails());
+            InputStream inputStream = assetManager.open(((MessageItem) getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM)).getAssetUri());
             byte[] buffer = new byte[inputStream.available()];
             inputStream.read(buffer);
             inputStream.close();

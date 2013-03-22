@@ -11,7 +11,7 @@ import android.os.Parcelable;
 public interface FestivityItem extends Parcelable {
     public int getId();
 
-    public String getTeaser();
+    public String getName();
 
-    public String getDetails();
+    public String getAssetUri();
 }

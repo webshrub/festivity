@@ -29,9 +29,10 @@ public class WallpaperItemManager {
             String[] wallpaperNames = assetManager.list(FestivityConstants.WALLPAPER_ASSETS_DIR);
             wallpaperItemList = new ArrayList<WallpaperItem>(wallpaperNames.length);
             for (int i = 0, fileNamesLength = wallpaperNames.length; i < fileNamesLength; i++) {
-                String wallpaperUri = FestivityConstants.WALLPAPER_ASSETS_DIR + "/" + wallpaperNames[i];
-                String wallpaperAssetUri = "assets://" + FestivityConstants.WALLPAPER_ASSETS_DIR + "/" + wallpaperNames[i];
-                wallpaperItemList.add(new WallpaperItem(i, wallpaperNames[i], wallpaperUri, wallpaperAssetUri));
+                String name = wallpaperNames[i];
+                String assetUri = FestivityConstants.WALLPAPER_ASSETS_DIR + "/" + wallpaperNames[i];
+                String displayAssetUri = "assets://" + FestivityConstants.WALLPAPER_ASSETS_DIR + "/" + wallpaperNames[i];
+                wallpaperItemList.add(new WallpaperItem(i, name, assetUri, displayAssetUri));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -62,10 +63,10 @@ public class WallpaperItemManager {
         if (externalStoragePresent) {
             File folder = new File(Environment.getExternalStorageDirectory().toString() + "/" + FestivityConstants.WALLPAPER_STORAGE_DIR);
             folder.mkdirs();
-            String fileName = currentWallpaperItem.getTeaser();
+            String fileName = currentWallpaperItem.getName();
             File destinationFile = new File(folder, fileName);
             byte[] buffer = new byte[1024];
-            AssetFileDescriptor sourceFileDescriptor = context.getAssets().openFd(currentWallpaperItem.getDetails());
+            AssetFileDescriptor sourceFileDescriptor = context.getAssets().openFd(currentWallpaperItem.getAssetUri());
             FileInputStream inputStream = sourceFileDescriptor.createInputStream();
             FileOutputStream outputStream = new FileOutputStream(destinationFile);
             int i = inputStream.read(buffer);
@@ -80,13 +81,13 @@ public class WallpaperItemManager {
     }
 
     public void shareWallpaper(WallpaperItem currentWallpaperItem) {
-        Uri wallpaperUri = Uri.parse(FestivityConstants.FESTIVITY_CONTENT_PROVIDER_AUTHORITY + currentWallpaperItem.getDetails());
-        String extension = currentWallpaperItem.getDetails().substring(currentWallpaperItem.getDetails().lastIndexOf('.') + 1);
+        Uri wallpaperUri = Uri.parse(FestivityConstants.FESTIVITY_CONTENT_PROVIDER_AUTHORITY + currentWallpaperItem.getAssetUri());
+        String extension = currentWallpaperItem.getAssetUri().substring(currentWallpaperItem.getAssetUri().lastIndexOf('.') + 1);
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType(MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension));
         shareIntent.putExtra(Intent.EXTRA_STREAM, wallpaperUri);
-        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, currentWallpaperItem.getTeaser());
-        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, currentWallpaperItem.getTeaser());
+        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, currentWallpaperItem.getName());
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, currentWallpaperItem.getName());
         context.startActivity(shareIntent);
     }
 }

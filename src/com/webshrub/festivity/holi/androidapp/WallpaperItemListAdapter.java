@@ -56,7 +56,7 @@ public class WallpaperItemListAdapter extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;
         }
-        ImageLoader.getInstance().displayImage(wallpaperItemManager.getWallpaperItemAt(position).getAssetUri(), imageView, options);
+        ImageLoader.getInstance().displayImage(wallpaperItemManager.getWallpaperItemAt(position).getDisplayAssetUri(), imageView, options);
         return imageView;
     }
 }

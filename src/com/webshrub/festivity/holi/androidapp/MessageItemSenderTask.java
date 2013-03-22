@@ -40,8 +40,8 @@ public class MessageItemSenderTask extends AsyncTask<Contact, Integer, Void> {
     protected Void doInBackground(Contact... contacts) {
         for (int count = 0; count < contacts.length; count++) {
             Contact contact = contacts[count];
-            sendSMS(contact.getNumber(), messageItem.getDetails());
-            saveSentSms(contact.getNumber(), messageItem.getDetails());
+            sendSMS(contact.getNumber(), messageItem.getAssetUri());
+            saveSentSms(contact.getNumber(), messageItem.getAssetUri());
 //            sendSMS("9810572052", messageItem.getDetails());
 //            saveSentSms("9810572052", messageItem.getDetails());
 //            try {
