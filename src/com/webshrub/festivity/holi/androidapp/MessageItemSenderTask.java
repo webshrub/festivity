@@ -3,12 +3,10 @@ package com.webshrub.festivity.holi.androidapp;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.telephony.SmsManager;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MessageItemSenderTask extends AsyncTask<Contact, Integer, Void> {
@@ -41,12 +39,7 @@ public class MessageItemSenderTask extends AsyncTask<Contact, Integer, Void> {
     @Override
     protected Void doInBackground(Contact... contacts) {
         try {
-            AssetManager assetManager = context.getAssets();
-            InputStream inputStream = assetManager.open(messageItem.getAssetUri());
-            byte[] buffer = new byte[inputStream.available()];
-            inputStream.read(buffer);
-            inputStream.close();
-            String message = new String(buffer);
+            String message = new MessageItemManager(context).getMessageString(messageItem);
             for (int count = 0; count < contacts.length; count++) {
                 Contact contact = contacts[count];
                 sendSMS(contact.getNumber(), message);

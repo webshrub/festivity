@@ -1,7 +1,6 @@
 package com.webshrub.festivity.holi.androidapp;
 
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -12,8 +11,6 @@ import android.widget.TextView;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-
-import java.io.InputStream;
 
 /**
  * Created by IntelliJ IDEA.
@@ -55,16 +52,8 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
         int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getActivity().getResources().getDisplayMetrics());
         text.setPadding(padding, padding, padding, padding);
         scroller.addView(text);
-        try {
-            AssetManager assetManager = getSherlockActivity().getAssets();
-            InputStream inputStream = assetManager.open(((MessageItem) getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM)).getAssetUri());
-            byte[] buffer = new byte[inputStream.available()];
-            inputStream.read(buffer);
-            inputStream.close();
-            text.setText(new String(buffer));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String message = new MessageItemManager(getSherlockActivity()).getMessageString((MessageItem) getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM));
+        text.setText(message);
         return scroller;
     }
 }
