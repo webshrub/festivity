@@ -14,7 +14,7 @@
     <application android:name=".FestivityApplication" android:hardwareAccelerated="true" android:label="@string/application_name"
                  android:icon="@drawable/ic_launcher" android:theme="@style/Theme.AndroidDevelopers">
         <activity android:label="@string/application_name" android:name="com.webshrub.festivity.holi.androidapp.FestivityHomeActivity"
-                  android:launchMode="singleTop">
+                  android:launchMode="singleTop" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -22,20 +22,21 @@
             </intent-filter>
         </activity>
         <activity android:label="@string/preferences" android:name="com.webshrub.festivity.holi.androidapp.FestivityPreferenceActivity"
-                  android:launchMode="singleTop">
+                  android:launchMode="singleTop" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="com.webshrub.festivity.androidapp.CATEGORY"/>
             </intent-filter>
         </activity>
         <activity android:label="@string/contact_picker" android:name="com.webshrub.festivity.holi.androidapp.ContactPickerActivity"
-                  android:launchMode="singleTop">
+                  android:launchMode="singleTop" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="com.webshrub.festivity.androidapp.CATEGORY"/>
             </intent-filter>
         </activity>
-        <activity android:label="@string/application_name" android:name="com.webshrub.festivity.holi.androidapp.FestivityItemDetailsActivity"/>
+        <activity android:label="@string/application_name" android:name="com.webshrub.festivity.holi.androidapp.FestivityItemDetailsActivity"
+                  android:screenOrientation="portrait"/>
         <provider android:name="com.webshrub.festivity.holi.androidapp.FestivityContentProvider" android:authorities="com.webshrub.festivity.holi.androidapp"/>
     </application>
 </manifest>
