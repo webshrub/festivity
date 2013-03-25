@@ -2,11 +2,9 @@ package com.webshrub.festivity.holi.androidapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -47,13 +45,10 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ScrollView scroller = new ScrollView(getActivity());
-        TextView text = new TextView(getActivity());
-        int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getActivity().getResources().getDisplayMetrics());
-        text.setPadding(padding, padding, padding, padding);
-        scroller.addView(text);
+        View view = inflater.inflate(R.layout.message_details, container, false);
+        TextView messageTextView = (TextView) view.findViewById(R.id.messageTextView);
         String message = new MessageItemManager(getSherlockActivity()).getMessageString((MessageItem) getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM));
-        text.setText(message);
-        return scroller;
+        messageTextView.setText(message);
+        return view;
     }
 }
