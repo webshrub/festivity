@@ -1,10 +1,17 @@
 package com.webshrub.festivity.holi.androidapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.net.Uri;
 import android.os.Environment;
+import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -92,5 +99,38 @@ public class FestivityUtility {
 
     public static String getExtension(String inputString) {
         return inputString.substring(inputString.lastIndexOf("."));
+    }
+
+    public static void shareFestivityItem(Context context, FestivityItem festivityItem) {
+        Uri itemUri = Uri.parse(FestivityConstants.FESTIVITY_CONTENT_PROVIDER_AUTHORITY + festivityItem.getAssetUri());
+        String extension = festivityItem.getAssetUri().substring(festivityItem.getAssetUri().lastIndexOf('.') + 1);
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType(MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension));
+        shareIntent.putExtra(Intent.EXTRA_STREAM, itemUri);
+        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, festivityItem.getName());
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, festivityItem.getName());
+        context.startActivity(shareIntent);
+    }
+
+    public static File copyFestivityItemToStorage(Context context, FestivityItem festivityItem, String storageDir) throws IOException {
+        boolean externalStoragePresent = FestivityUtility.isExternalStoragePresent(context);
+        if (externalStoragePresent) {
+            File folder = new File(Environment.getExternalStorageDirectory().toString() + "/" + storageDir);
+            folder.mkdirs();
+            String fileName = festivityItem.getName();
+            File destinationFile = new File(folder, fileName);
+            byte[] buffer = new byte[1024];
+            AssetFileDescriptor sourceFileDescriptor = context.getAssets().openFd(festivityItem.getAssetUri());
+            FileInputStream inputStream = sourceFileDescriptor.createInputStream();
+            FileOutputStream outputStream = new FileOutputStream(destinationFile);
+            int i = inputStream.read(buffer);
+            while (i != -1) {
+                outputStream.write(buffer, 0, i);
+                i = inputStream.read(buffer);
+            }
+            outputStream.close();
+            return destinationFile;
+        }
+        return null;
     }
 }

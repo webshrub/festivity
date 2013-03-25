@@ -2,18 +2,13 @@ package com.webshrub.festivity.holi.androidapp;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.webkit.MimeTypeMap;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +63,7 @@ public class RingtoneItemManager {
 
     public void setRingtone(RingtoneItem currentRingtoneItem) {
         try {
-            File copiedRingtoneFile = copyRingtoneToStorage(currentRingtoneItem);
+            File copiedRingtoneFile = FestivityUtility.copyFestivityItemToStorage(context, currentRingtoneItem, FestivityConstants.RINGTONE_STORAGE_DIR);
 
             Uri newRingtoneUri = MediaStore.Audio.Media.getContentUriForPath(copiedRingtoneFile.getAbsolutePath());
             context.getContentResolver().delete(newRingtoneUri, MediaStore.MediaColumns.DATA + "=\"" + copiedRingtoneFile.getAbsolutePath() + "\"", null);
@@ -91,38 +86,5 @@ public class RingtoneItemManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public File copyRingtoneToStorage(RingtoneItem currentRingtoneItem) throws IOException {
-        boolean externalStoragePresent = FestivityUtility.isExternalStoragePresent(context);
-        if (externalStoragePresent) {
-            File folder = new File(Environment.getExternalStorageDirectory().toString() + "/" + FestivityConstants.RINGTONE_STORAGE_DIR);
-            folder.mkdirs();
-            String fileName = currentRingtoneItem.getNameWithExtension();
-            File destinationFile = new File(folder, fileName);
-            byte[] buffer = new byte[1024];
-            AssetFileDescriptor sourceFileDescriptor = context.getAssets().openFd(currentRingtoneItem.getAssetUri());
-            FileInputStream inputStream = sourceFileDescriptor.createInputStream();
-            FileOutputStream outputStream = new FileOutputStream(destinationFile);
-            int i = inputStream.read(buffer);
-            while (i != -1) {
-                outputStream.write(buffer, 0, i);
-                i = inputStream.read(buffer);
-            }
-            outputStream.close();
-            return destinationFile;
-        }
-        return null;
-    }
-
-    public void shareRingtone(RingtoneItem currentRingtoneItem) {
-        Uri ringtoneUri = Uri.parse(FestivityConstants.FESTIVITY_CONTENT_PROVIDER_AUTHORITY + currentRingtoneItem.getAssetUri());
-        String extension = currentRingtoneItem.getAssetUri().substring(currentRingtoneItem.getAssetUri().lastIndexOf('.') + 1);
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType(MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension));
-        shareIntent.putExtra(Intent.EXTRA_STREAM, ringtoneUri);
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, currentRingtoneItem.getName());
-        shareIntent.putExtra(Intent.EXTRA_TEXT, currentRingtoneItem.getName());
-        context.startActivity(shareIntent);
     }
 }

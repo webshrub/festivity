@@ -78,7 +78,7 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
                 Toast.makeText(getSherlockActivity(), "Ringtone set successfully.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_share_ringtone:
-                songManager.shareRingtone(currentSong);
+                FestivityUtility.shareFestivityItem(getSherlockActivity(), currentSong);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -47,7 +47,7 @@ public class WallpaperItemDetailsFragment extends FestivityItemDetailsFragment<W
             case R.id.menu_share_wallpaper:
                 currentPosition = viewPager.getCurrentItem();
                 currentWallpaperItem = wallpaperItemManager.getWallpaperItemAt(currentPosition);
-                wallpaperItemManager.shareWallpaper(currentWallpaperItem);
+                FestivityUtility.shareFestivityItem(getSherlockActivity(), currentWallpaperItem);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
