@@ -9,40 +9,20 @@ import android.os.Parcelable;
  * Date: 3/5/13
  * Time: 3:14 PM
  */
-public class RingtoneItem implements FestivityItem {
-    private int id;
-    private String name;
+public class RingtoneItem extends FestivityItem {
     private String nameWithExtension;
-    private String assetUri;
 
     public RingtoneItem() {
+        super();
     }
 
     public RingtoneItem(int id, String name, String nameWithExtension, String assetUri) {
-        this.id = id;
-        this.name = name;
+        super(id, name, assetUri);
         this.nameWithExtension = nameWithExtension;
-        this.assetUri = assetUri;
     }
 
     public RingtoneItem(Parcel in) {
         readFromParcel(in);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getNameWithExtension() {
@@ -51,19 +31,6 @@ public class RingtoneItem implements FestivityItem {
 
     public void setNameWithExtension(String nameWithExtension) {
         this.nameWithExtension = nameWithExtension;
-    }
-
-    public String getAssetUri() {
-        return assetUri;
-    }
-
-    public void setAssetUri(String assetUri) {
-        this.assetUri = assetUri;
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 
     @Override

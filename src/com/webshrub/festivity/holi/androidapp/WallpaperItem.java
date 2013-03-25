@@ -9,48 +9,20 @@ import android.os.Parcelable;
  * Date: 3/5/13
  * Time: 3:14 PM
  */
-public class WallpaperItem implements FestivityItem {
-    private int id;
-    private String name;
-    private String assetUri;
+public class WallpaperItem extends FestivityItem {
     private String displayAssetUri;
 
     public WallpaperItem() {
+        super();
     }
 
     public WallpaperItem(int id, String name, String assetUri, String displayAssetUri) {
-        this.id = id;
-        this.name = name;
-        this.assetUri = assetUri;
+        super(id, name, assetUri);
         this.displayAssetUri = displayAssetUri;
     }
 
     public WallpaperItem(Parcel in) {
         readFromParcel(in);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAssetUri() {
-        return assetUri;
-    }
-
-    public void setAssetUri(String assetUri) {
-        this.assetUri = assetUri;
     }
 
     public String getDisplayAssetUri() {
@@ -59,11 +31,6 @@ public class WallpaperItem implements FestivityItem {
 
     public void setDisplayAssetUri(String displayAssetUri) {
         this.displayAssetUri = displayAssetUri;
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 
     @Override

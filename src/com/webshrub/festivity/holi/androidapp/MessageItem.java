@@ -9,51 +9,18 @@ import android.os.Parcelable;
  * Date: 3/5/13
  * Time: 3:14 PM
  */
-public class MessageItem implements FestivityItem {
-    private int id;
-    private String name;
-    private String assetUri;
+public class MessageItem extends FestivityItem {
 
     public MessageItem() {
+        super();
     }
 
     public MessageItem(int id, String name, String assetUri) {
-        this.id = id;
-        this.name = name;
-        this.assetUri = assetUri;
+        super(id, name, assetUri);
     }
 
     public MessageItem(Parcel in) {
         readFromParcel(in);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAssetUri() {
-        return assetUri;
-    }
-
-    public void setAssetUri(String assetUri) {
-        this.assetUri = assetUri;
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 
     @Override
