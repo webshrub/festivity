@@ -197,11 +197,11 @@ public class FestivityHomeActivity extends SherlockFragmentActivity {
                 String twitterUrl = "https://twitter.com/intent/tweet?text=Friends%2C%20I%20am%20using%20%23dndmanager%20to%20block%20pesky%20Calls%2FSMS.%20Download%20it%20http%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.webshrub.moonwalker.androidapp";
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(twitterUrl)));
                 return true;
-//            case R.id.menu_settings:
-//                Intent preferenceIntent = new Intent(this, FestivityPreferenceActivity.class);
-//                preferenceIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-//                startActivity(preferenceIntent);
-//                return true;
+            case R.id.menu_settings:
+                Intent preferenceIntent = new Intent(this, FestivityPreferenceActivity.class);
+                preferenceIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(preferenceIntent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

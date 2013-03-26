@@ -16,8 +16,8 @@
 
 <!-- This is a primitive example showing the different types of preferences available. -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="About">
-        <CheckBoxPreference android:key="checkbox_preference" android:title="About This"
-                            android:summary="About this summary"/>
+    <PreferenceCategory android:title="Ringtone">
+        <CheckBoxPreference android:key="autoPlay" android:title="Auto Play" android:summary="Immediately start playing ringtone when selected"
+                            android:defaultValue="true"/>
     </PreferenceCategory>
 </PreferenceScreen>

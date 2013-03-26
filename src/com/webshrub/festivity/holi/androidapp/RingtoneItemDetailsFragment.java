@@ -1,9 +1,11 @@
 package com.webshrub.festivity.holi.androidapp;
 
+import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -123,12 +125,16 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
             mediaPlayer.setDataSource(assetFileDescriptor.getFileDescriptor(), assetFileDescriptor.getStartOffset(), assetFileDescriptor.getLength());
             assetFileDescriptor.close();
             mediaPlayer.prepare();
-            mediaPlayer.start();
             songTitle.setText(currentSong.getName());
-            btnPlay.setImageResource(R.drawable.btn_pause);
             songProgressBar.setProgress(0);
             songProgressBar.setMax(100);
             updateProgressBar();
+            if (isAutoPlay()) {
+                btnPlay.setImageResource(R.drawable.btn_pause);
+                mediaPlayer.start();
+            } else {
+                btnPlay.setImageResource(R.drawable.btn_play);
+            }
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (IllegalStateException e) {
@@ -136,6 +142,11 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean isAutoPlay() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
+        return sharedPreferences.getBoolean("autoPlay", true);
     }
 
     public void updateProgressBar() {
