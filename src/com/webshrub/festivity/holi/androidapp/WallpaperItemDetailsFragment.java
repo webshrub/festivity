@@ -57,7 +57,7 @@ public class WallpaperItemDetailsFragment extends FestivityItemDetailsFragment<W
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = inflater.inflate(R.layout.wallpaper_item_details_pager, container, false);
+        View view = inflater.inflate(R.layout.festivity_item_details_pager, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.pager);
         viewPager.setAdapter(new WallpaperItemPagerAdapter(getSherlockActivity()));
         return view;

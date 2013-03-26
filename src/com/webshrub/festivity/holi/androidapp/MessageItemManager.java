@@ -45,4 +45,8 @@ public class MessageItemManager {
         }
         return null;
     }
+
+    public MessageItem getMessageItemAt(int position) {
+        return messageItemList.get(position);
+    }
 }

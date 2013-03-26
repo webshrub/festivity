@@ -2,10 +2,10 @@ package com.webshrub.festivity.holi.androidapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
@@ -17,11 +17,16 @@ import com.actionbarsherlock.view.MenuItem;
  * Time: 2:40 PM
  */
 public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<MessageItem> {
+    private MessageItemManager messageItemManager;
+    private ViewPager viewPager;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
+        messageItemManager = new MessageItemManager(getSherlockActivity());
+        int pagerPosition = ((MessageItem) getSherlockActivity().getIntent().getExtras().getParcelable(FestivityConstants.FESTIVITY_ITEM)).getId();
+        viewPager.setCurrentItem(pagerPosition);
     }
 
     @Override
@@ -34,8 +39,10 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_send_to_contacts:
+                int currentPosition = viewPager.getCurrentItem();
+                MessageItem currentMessageItem = messageItemManager.getMessageItemAt(currentPosition);
                 Intent contactPickerIntent = new Intent(getActivity(), ContactPickerActivity.class);
-                contactPickerIntent.putExtra(FestivityConstants.FESTIVITY_ITEM, getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM));
+                contactPickerIntent.putExtra(FestivityConstants.FESTIVITY_ITEM, currentMessageItem);
                 startActivity(contactPickerIntent);
                 return true;
             default:
@@ -45,10 +52,9 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.message_details, container, false);
-        TextView messageTextView = (TextView) view.findViewById(R.id.messageTextView);
-        String message = new MessageItemManager(getSherlockActivity()).getMessageString((MessageItem) getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM));
-        messageTextView.setText(message);
+        View view = inflater.inflate(R.layout.festivity_item_details_pager, container, false);
+        viewPager = (ViewPager) view.findViewById(R.id.pager);
+        viewPager.setAdapter(new MessageItemPagerAdapter(getSherlockActivity()));
         return view;
     }
 }
