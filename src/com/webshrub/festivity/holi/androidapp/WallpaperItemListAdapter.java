@@ -52,7 +52,7 @@ public class WallpaperItemListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         final ImageView imageView;
         if (convertView == null) {
-            imageView = (ImageView) ((Activity) context).getLayoutInflater().inflate(R.layout.item_grid_image, parent, false);
+            imageView = (ImageView) ((Activity) context).getLayoutInflater().inflate(R.layout.wallpaper_item_grid_image, parent, false);
         } else {
             imageView = (ImageView) convertView;
         }

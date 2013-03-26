@@ -23,8 +23,8 @@ public class WallpaperItemListFragment extends SherlockFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         wallpaperItemListAdapter = new WallpaperItemListAdapter(getSherlockActivity());
-        View view = inflater.inflate(R.layout.ac_image_grid, container, false);
-        AbsListView listView = (GridView) view.findViewById(R.id.gridview);
+        View view = inflater.inflate(R.layout.wallpaper_item_grid, container, false);
+        AbsListView listView = (GridView) view.findViewById(R.id.wallpaperItemGridView);
         listView.setAdapter(wallpaperItemListAdapter);
         listView.setOnItemClickListener(new WallpaperItemOnClickListener());
         return view;
