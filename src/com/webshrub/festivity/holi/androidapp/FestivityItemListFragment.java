@@ -2,7 +2,6 @@ package com.webshrub.festivity.holi.androidapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SearchViewCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ListView;
@@ -10,6 +9,7 @@ import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.widget.SearchView;
 
 /**
  * Created by IntelliJ IDEA.
@@ -45,11 +45,16 @@ public class FestivityItemListFragment<T extends FestivityItem> extends Sherlock
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_list, menu);
         MenuItem searchItem = menu.findItem(R.id.menu_search);
-        View searchView = searchItem.getActionView();
-        SearchViewCompat.setOnQueryTextListener(searchView, new FestivityOnQueryTextListenerCompat());
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new FestivityOnQueryTextListener());
     }
 
-    private class FestivityOnQueryTextListenerCompat extends SearchViewCompat.OnQueryTextListenerCompat {
+    private class FestivityOnQueryTextListener implements SearchView.OnQueryTextListener {
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            return false;
+        }
+
         @Override
         public boolean onQueryTextChange(String newText) {
             // Called when the action bar search text has changed.  Update the search filter, and restart the loader to do a new query with this filter.
