@@ -13,6 +13,6 @@ public class FestivityConstants {
     public static final String WALLPAPER_ASSETS_DIR = "wallpaper";
     public static final String WALLPAPER_STORAGE_DIR = "festivity/wallpaper";
     public static final String MESSAGE_ASSETS_DIR = "message";
-    public static final boolean DEVELOPER_MODE = true;
+    public static final boolean DEVELOPER_MODE = false;
     public static final String FESTIVITY_CONTENT_PROVIDER_AUTHORITY = "content://com.webshrub.festivity.holi.androidapp/";
 }
