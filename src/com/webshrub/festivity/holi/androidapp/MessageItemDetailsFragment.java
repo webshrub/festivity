@@ -6,6 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
@@ -17,14 +19,12 @@ import com.actionbarsherlock.view.MenuItem;
  * Time: 2:40 PM
  */
 public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<MessageItem> {
-    private MessageItemManager messageItemManager;
     private ViewPager viewPager;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        messageItemManager = new MessageItemManager(getSherlockActivity());
         int pagerPosition = ((MessageItem) getSherlockActivity().getIntent().getExtras().getParcelable(FestivityConstants.FESTIVITY_ITEM)).getId();
         viewPager.setCurrentItem(pagerPosition);
     }
@@ -39,10 +39,9 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_send_to_contacts:
-                int currentPosition = viewPager.getCurrentItem();
-                MessageItem currentMessageItem = messageItemManager.getMessageItemAt(currentPosition);
+                EditText messageTextView = (EditText) viewPager.findViewById(R.id.messageTextView);
                 Intent contactPickerIntent = new Intent(getActivity(), ContactPickerActivity.class);
-                contactPickerIntent.putExtra(FestivityConstants.FESTIVITY_ITEM, currentMessageItem);
+                contactPickerIntent.putExtra("messageText", messageTextView.getText().toString());
                 startActivity(contactPickerIntent);
                 return true;
             default:

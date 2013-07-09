@@ -18,12 +18,12 @@ public class MessageItemSenderTask extends AsyncTask<Contact, Integer, Void> {
     public static final String BODY = "body";
 
     private Context context;
-    private MessageItem messageItem;
+    private String message;
     private ProgressDialog progressDialog;
 
-    public MessageItemSenderTask(Context context, MessageItem messageItem) {
+    public MessageItemSenderTask(Context context, String message) {
         this.context = context;
-        this.messageItem = messageItem;
+        this.message = message;
         progressDialog = new ProgressDialog(context);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Sending message to selected contacts..");
@@ -39,7 +39,6 @@ public class MessageItemSenderTask extends AsyncTask<Contact, Integer, Void> {
     @Override
     protected Void doInBackground(Contact... contacts) {
         try {
-            String message = new MessageItemManager(context).getMessageString(messageItem);
             for (int count = 0; count < contacts.length; count++) {
                 Contact contact = contacts[count];
                 sendSMS(contact.getNumber(), message);

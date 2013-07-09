@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
@@ -63,7 +64,6 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.send:
-                MessageItem messageItem = (MessageItem) getArguments().getParcelable(FestivityConstants.FESTIVITY_ITEM);
                 SparseBooleanArray checked = getListView().getCheckedItemPositions();
                 List<Contact> contactList = new ArrayList<Contact>();
                 for (int position = 0; position < getListView().getCount(); position++) {
@@ -75,7 +75,8 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
                     Toast.makeText(getActivity(), "Please choose some contacts\n", Toast.LENGTH_LONG).show();
                     return true;
                 }
-                new MessageItemSenderTask(getSherlockActivity(), messageItem).execute(contactList.toArray(new Contact[contactList.size()]));
+                String message = getArguments().getString(FestivityConstants.MESSAGE_TEXT);
+                new MessageItemSenderTask(getSherlockActivity(), message).execute(contactList.toArray(new Contact[contactList.size()]));
                 selectDeselectAll(false);
                 return true;
             default:

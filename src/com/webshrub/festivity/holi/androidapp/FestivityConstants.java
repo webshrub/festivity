@@ -7,6 +7,7 @@ package com.webshrub.festivity.holi.androidapp;
  * Time: 3:08 PM
  */
 public class FestivityConstants {
+    public static final String MESSAGE_TEXT = "messageText";
     public static final String FESTIVITY_ITEM = "FESTIVITY_ITEM";
     public static final String RINGTONE_ASSETS_DIR = "ringtone";
     public static final String RINGTONE_STORAGE_DIR = "festivity/ringtone";
