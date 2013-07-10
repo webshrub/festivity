@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ListView;
+
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -24,7 +25,7 @@ public class FestivityItemListFragment<T extends FestivityItem> extends Sherlock
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setEmptyText("No data found.");
+        setEmptyText(getResources().getString(R.string.no_contacts_found));
         // We have a menu item to show in action bar.
         setHasOptionsMenu(true);
         getListView().setTextFilterEnabled(true);

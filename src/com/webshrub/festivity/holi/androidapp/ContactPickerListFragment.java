@@ -41,7 +41,7 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
         super.onActivityCreated(savedInstanceState);
         // Give some text to display if there is no data.  In a real
         // application this would come from a resource.
-        setEmptyText("No contacts found.");
+        setEmptyText(getResources().getString(R.string.no_contacts_found));
         // We have a menu item to show in action bar.
         setHasOptionsMenu(true);
         // Create an empty adapter we will use to display the loaded data.
@@ -72,7 +72,7 @@ public class ContactPickerListFragment extends SherlockListFragment implements L
                     }
                 }
                 if (contactList.size() == 0) {
-                    Toast.makeText(getActivity(), "Please choose some contacts\n", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), R.string.toast_please_choose_some_contacts, Toast.LENGTH_LONG).show();
                     return true;
                 }
                 String message = getArguments().getString(FestivityConstants.MESSAGE_TEXT);

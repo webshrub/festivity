@@ -26,8 +26,8 @@ public class MessageItemSenderTask extends AsyncTask<Contact, Integer, Void> {
         this.message = message;
         progressDialog = new ProgressDialog(context);
         progressDialog.setCancelable(false);
-        progressDialog.setMessage("Sending message to selected contacts..");
-        progressDialog.setTitle("Please wait");
+        progressDialog.setMessage(context.getResources().getString(R.string.dialog_sending_message_to_selected_contacts));
+        progressDialog.setTitle(R.string.dialog_please_wait);
         progressDialog.setIndeterminate(true);
     }
 
@@ -68,9 +68,9 @@ public class MessageItemSenderTask extends AsyncTask<Contact, Integer, Void> {
     @Override
     protected void onProgressUpdate(Integer... progress) {
         if (progress[0].equals(progress[1])) {
-            progressDialog.setMessage("Message sent  to all " + progress[1] + " selected contacts..");
+            progressDialog.setMessage(context.getResources().getString(R.string.dialog_message_sent_to_all, progress[1]));
         } else {
-            progressDialog.setMessage("Message sent  to " + progress[0] + " out of " + progress[1] + " selected contacts..");
+            progressDialog.setMessage(context.getResources().getString(R.string.dialog_message_sent_out_of, progress[0], progress[1]));
         }
     }
 

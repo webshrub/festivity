@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TabWidget;
+
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -56,9 +57,9 @@ public class FestivityHomeActivity extends SherlockFragmentActivity {
 
         mTabsAdapter = new TabsAdapter(this, mTabHost, mViewPager);
 
-        mTabsAdapter.addTab(mTabHost.newTabSpec("messages").setIndicator("Messages"), MessageItemListFragment.class, null);
-        mTabsAdapter.addTab(mTabHost.newTabSpec("ringtones").setIndicator("Ringtones"), RingtoneItemListFragment.class, null);
-        mTabsAdapter.addTab(mTabHost.newTabSpec("wallpapers").setIndicator("Wallpapers"), WallpaperItemListFragment.class, null);
+        mTabsAdapter.addTab(mTabHost.newTabSpec("messages").setIndicator(getString(R.string.messages)), MessageItemListFragment.class, null);
+        mTabsAdapter.addTab(mTabHost.newTabSpec("ringtones").setIndicator(getString(R.string.ringtones)), RingtoneItemListFragment.class, null);
+        mTabsAdapter.addTab(mTabHost.newTabSpec("wallpapers").setIndicator(getString(R.string.wallpapers)), WallpaperItemListFragment.class, null);
 
         if (savedInstanceState != null) {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));

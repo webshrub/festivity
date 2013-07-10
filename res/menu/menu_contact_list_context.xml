@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/select_all" android:title="Select All"/>
-    <item android:id="@+id/select_none" android:title="Select None"/>
+    <item
+            android:id="@+id/select_all"
+            android:title="@string/action_label_select_all"/>
+    <item
+            android:id="@+id/select_none"
+            android:title="@string/action_label_select_none"/>
 </menu>

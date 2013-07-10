@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
@@ -42,7 +43,7 @@ public class WallpaperItemDetailsFragment extends FestivityItemDetailsFragment<W
                 int currentPosition = viewPager.getCurrentItem();
                 WallpaperItem currentWallpaperItem = wallpaperItemManager.getWallpaperItemAt(currentPosition);
                 wallpaperItemManager.setWallpaper(currentWallpaperItem);
-                Toast.makeText(getSherlockActivity(), "Wallpaper set successfully.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getSherlockActivity(), R.string.toast_wallpaper_set_successfully, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_share_wallpaper:
                 currentPosition = viewPager.getCurrentItem();

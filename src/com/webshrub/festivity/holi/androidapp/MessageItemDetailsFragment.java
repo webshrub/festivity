@@ -41,7 +41,7 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
             case R.id.menu_send_to_contacts:
                 EditText messageTextView = (EditText) viewPager.findViewById(R.id.messageTextView);
                 Intent contactPickerIntent = new Intent(getActivity(), ContactPickerActivity.class);
-                contactPickerIntent.putExtra("messageText", messageTextView.getText().toString());
+                contactPickerIntent.putExtra(FestivityConstants.MESSAGE_TEXT, messageTextView.getText().toString());
                 startActivity(contactPickerIntent);
                 return true;
             default:

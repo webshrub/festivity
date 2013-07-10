@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
@@ -77,7 +78,7 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
         switch (item.getItemId()) {
             case R.id.menu_set_ringtone:
                 songManager.setRingtone(currentSong);
-                Toast.makeText(getSherlockActivity(), "Ringtone set successfully.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getSherlockActivity(), R.string.toast_ringtone_set_successfully, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_share_ringtone:
                 FestivityUtility.shareFestivityItem(getSherlockActivity(), currentSong);
@@ -255,11 +256,11 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
         public void onClick(View view) {
             if (isRepeat) {
                 isRepeat = false;
-                Toast.makeText(getSherlockActivity(), "Repeat is OFF", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getSherlockActivity(), R.string.toast_repeat_is_OFF, Toast.LENGTH_SHORT).show();
                 btnRepeat.setImageResource(R.drawable.btn_repeat);
             } else {
                 isRepeat = true;
-                Toast.makeText(getSherlockActivity(), "Repeat is ON", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getSherlockActivity(), R.string.toast_repeat_is_ON, Toast.LENGTH_SHORT).show();
                 isShuffle = false;
                 btnRepeat.setImageResource(R.drawable.btn_repeat_focused);
                 btnShuffle.setImageResource(R.drawable.btn_shuffle);
@@ -272,11 +273,11 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
         public void onClick(View view) {
             if (isShuffle) {
                 isShuffle = false;
-                Toast.makeText(getSherlockActivity(), "Shuffle is OFF", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getSherlockActivity(), R.string.toast_shuffle_is_OFF, Toast.LENGTH_SHORT).show();
                 btnShuffle.setImageResource(R.drawable.btn_shuffle);
             } else {
                 isShuffle = true;
-                Toast.makeText(getSherlockActivity(), "Shuffle is ON", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getSherlockActivity(), R.string.toast_shuffle_is_ON, Toast.LENGTH_SHORT).show();
                 isRepeat = false;
                 btnShuffle.setImageResource(R.drawable.btn_shuffle_focused);
                 btnRepeat.setImageResource(R.drawable.btn_repeat);
