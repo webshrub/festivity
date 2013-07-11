@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.viewpagerindicator.UnderlinePageIndicator;
 
 /**
  * Created by IntelliJ IDEA.
@@ -54,6 +55,9 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
         View view = inflater.inflate(R.layout.festivity_item_details_pager, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.pager);
         viewPager.setAdapter(new MessageItemPagerAdapter(getSherlockActivity()));
+        UnderlinePageIndicator pageIndicator = (UnderlinePageIndicator) view.findViewById(R.id.pageIndicator);
+        pageIndicator.setViewPager(viewPager);
+        pageIndicator.setFades(false);
         return view;
     }
 }

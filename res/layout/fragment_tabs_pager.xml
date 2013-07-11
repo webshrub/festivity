@@ -18,16 +18,49 @@
 */
 -->
 
-<TabHost xmlns:android="http://schemas.android.com/apk/res/android" xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-         android:id="@android:id/tabhost" android:layout_width="match_parent" android:layout_height="match_parent">
-    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-        <TabWidget android:id="@android:id/tabs" android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content"
-                   android:layout_weight="0"/>
-        <FrameLayout android:id="@android:id/tabcontent" android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="0"/>
-        <android.support.v4.view.ViewPager android:id="@+id/pager" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:layout_alignParentBottom="true">
-            <com.google.ads.AdView android:id="@+id/adView1" android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                   ads:adUnitId="a15163dafa4ba89" ads:adSize="BANNER" ads:loadAdOnCreate="true"/>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+         xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+         android:id="@android:id/tabhost"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TabWidget
+                android:id="@android:id/tabs"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"/>
+
+        <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0"/>
+
+        <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_alignParentBottom="true">
+
+            <com.google.ads.AdView
+                    android:id="@+id/adView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    ads:adUnitId="a15163dafa4ba89"
+                    ads:adSize="BANNER"
+                    ads:loadAdOnCreate="true"/>
         </LinearLayout>
     </LinearLayout>
 </TabHost>
