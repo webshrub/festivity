@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_set_wallpaper" android:showAsAction="ifRoom" android:title="@string/action_label_set_wallpaper"/>
-    <item android:id="@+id/menu_share_wallpaper" android:showAsAction="ifRoom" android:title="@string/action_label_share_wallpaper"/>
+    <item
+            android:id="@+id/menu_set_wallpaper"
+            android:showAsAction="ifRoom"
+            android:title="@string/action_label_set_wallpaper"/>
+    <item
+            android:id="@+id/menu_share_wallpaper"
+            android:showAsAction="ifRoom"
+            android:title="@string/action_label_share_wallpaper"/>
+
 </menu>
