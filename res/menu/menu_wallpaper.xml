@@ -10,4 +10,8 @@
             android:showAsAction="ifRoom"
             android:title="@string/action_label_share_wallpaper"/>
 
+    <item
+            android:id="@+id/menu_send_wallpaper"
+            android:showAsAction="ifRoom"
+            android:title="@string/action_label_send_wallpaper"/>
 </menu>

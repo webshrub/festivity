@@ -98,7 +98,7 @@ public class FestivityUtility {
     }
 
     public static String getExtension(String inputString) {
-        return inputString.substring(inputString.lastIndexOf("."));
+        return inputString.substring(inputString.lastIndexOf(".") + 1);
     }
 
     public static void shareFestivityItem(Context context, FestivityItem festivityItem) {
@@ -110,6 +110,20 @@ public class FestivityUtility {
         shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, festivityItem.getName());
         shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, festivityItem.getName());
         context.startActivity(shareIntent);
+    }
+
+    public static void sendFestivityItem(Context context, FestivityItem festivityItem, String storageDirectory) {
+        try {
+            File copiedFile = FestivityUtility.copyFestivityItemToStorage(context, festivityItem, storageDirectory);
+            Uri festivityItemUri = Uri.fromFile(copiedFile);
+            Intent sendFestivityItemIntent = new Intent(Intent.ACTION_SEND);
+            sendFestivityItemIntent.putExtra(Intent.EXTRA_STREAM, festivityItemUri);
+            String extension = FestivityUtility.getExtension(copiedFile.getAbsolutePath());
+            sendFestivityItemIntent.setType(MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension));
+            context.startActivity(sendFestivityItemIntent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static File copyFestivityItemToStorage(Context context, FestivityItem festivityItem, String storageDir) throws IOException {
@@ -129,6 +143,7 @@ public class FestivityUtility {
                 i = inputStream.read(buffer);
             }
             outputStream.close();
+            inputStream.close();
             return destinationFile;
         }
         return null;

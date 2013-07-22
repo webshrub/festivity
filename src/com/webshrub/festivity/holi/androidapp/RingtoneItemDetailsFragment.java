@@ -83,6 +83,9 @@ public class RingtoneItemDetailsFragment extends FestivityItemDetailsFragment<Ri
             case R.id.menu_share_ringtone:
                 FestivityUtility.shareFestivityItem(getSherlockActivity(), currentSong);
                 return true;
+            case R.id.menu_send_ringtone:
+                FestivityUtility.sendFestivityItem(getSherlockActivity(),currentSong, FestivityConstants.RINGTONE_STORAGE_DIR);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

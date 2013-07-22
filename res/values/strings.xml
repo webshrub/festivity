@@ -11,8 +11,10 @@
     <string name="action_label_send_to_contacts">Send to contacts</string>
     <string name="action_label_set_ringtone">Set Ringtone</string>
     <string name="action_label_share_ringtone">Share Ringtone</string>
+    <string name="action_label_send_ringtone">Send Ringtone</string>
     <string name="action_label_set_wallpaper">Set Wallpaper</string>
     <string name="action_label_share_wallpaper">Share Wallpaper</string>
+    <string name="action_label_send_wallpaper">Send Wallpaper</string>
     <string name="messages">Messages</string>
     <string name="ringtones">Ringtones</string>
     <string name="wallpapers">Wallpapers</string>
