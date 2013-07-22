@@ -112,20 +112,6 @@ public class FestivityUtility {
         context.startActivity(shareIntent);
     }
 
-    public static void sendFestivityItem(Context context, FestivityItem festivityItem, String storageDirectory) {
-        try {
-            File copiedFile = FestivityUtility.copyFestivityItemToStorage(context, festivityItem, storageDirectory);
-            Uri festivityItemUri = Uri.fromFile(copiedFile);
-            Intent sendFestivityItemIntent = new Intent(Intent.ACTION_SEND);
-            sendFestivityItemIntent.putExtra(Intent.EXTRA_STREAM, festivityItemUri);
-            String extension = FestivityUtility.getExtension(copiedFile.getAbsolutePath());
-            sendFestivityItemIntent.setType(MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension));
-            context.startActivity(sendFestivityItemIntent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static File copyFestivityItemToStorage(Context context, FestivityItem festivityItem, String storageDir) throws IOException {
         boolean externalStoragePresent = FestivityUtility.isExternalStoragePresent(context);
         if (externalStoragePresent) {

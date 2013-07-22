@@ -9,8 +9,4 @@
             android:id="@+id/menu_share_ringtone"
             android:showAsAction="ifRoom"
             android:title="@string/action_label_share_ringtone"/>
-    <item
-            android:id="@+id/menu_send_ringtone"
-            android:showAsAction="ifRoom"
-            android:title="@string/action_label_send_ringtone"/>
 </menu>
