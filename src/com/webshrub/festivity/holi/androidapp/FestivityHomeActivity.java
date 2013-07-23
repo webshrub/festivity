@@ -203,6 +203,10 @@ public class FestivityHomeActivity extends SherlockFragmentActivity {
                 preferenceIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(preferenceIntent);
                 return true;
+            case R.id.menu_about:
+                Intent aboutIntent = new Intent(this, FestivityAboutActivity.class);
+                startActivity(aboutIntent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

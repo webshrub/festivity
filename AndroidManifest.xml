@@ -27,7 +27,7 @@
             android:name=".FestivityApplication"
             android:hardwareAccelerated="true"
             android:label="@string/application_name"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/festivity_icon"
             android:theme="@style/Theme.AndroidDevelopers">
         <activity
                 android:label="@string/application_name"
@@ -64,6 +64,10 @@
         <activity
                 android:label="@string/application_name"
                 android:name="com.webshrub.festivity.holi.androidapp.FestivityItemDetailsActivity"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:label="@string/action_label_about"
+                android:name=".FestivityAboutActivity"
                 android:screenOrientation="portrait"/>
 
         <provider

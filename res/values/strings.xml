@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="application_name">Festivity - Holi</string>
+    <string name="about_eid_activity">About Eid</string>
     <string name="action_label_search">Search</string>
     <string name="action_label_settings">Settings</string>
     <string name="preferences">Settings</string>
@@ -19,6 +20,7 @@
     <string name="action_label_select_all">Select All</string>
     <string name="action_label_select_none">Select None</string>
     <string name="action_label_send">Send</string>
+    <string name="action_label_about">About Eid</string>
     <string name="dialog_please_wait">Please wait</string>
     <string name="dialog_sending_message_to_selected_contacts">Sending message to selected
         contacts..
@@ -35,4 +37,23 @@
     <string name="toast_shuffle_is_OFF">Shuffle is OFF</string>
     <string name="toast_shuffle_is_ON">Shuffle is ON</string>
     <string name="toast_wallpaper_set_successfully">Wallpaper set successfully.</string>
+    <string name="festival_content">Before the advent of Islam in Arabia, there is mention of
+        festivals as well as some others among the Arabs. The Israelites had festivals as well, but
+        as is evident from the Old Testament and other scriptures, these festivals related more to
+        commemorating certain days of their history.
+        Eid al-Fitr was originated by the Islamic prophet Muhammad. It is observed on the first of
+        the month of Shawwal at the end of the month of Ramadan, during which Muslims undergo a
+        period of fasting.
+        According to certain traditions, these festivals were initiated in Madinah after the
+        migration of Muhammad from Mecca. Anas reports:
+        When the Prophet arrived in Madinah, he found people celebrating two specific days in which
+        they used to entertain themselves with recreation and merriment. He asked them about the
+        nature of these festivities at which they replied that these days were occasions of fun and
+        recreation. At this, the Prophet remarked that the Almighty has fixed two days [of
+        festivity] instead of these for you which are better than these: Eid al-Fitr and Eid al-Adha
+        For Muslims, both the festivals of Eid al-Fitr and Eid al-Adha are occasions of showing
+        gratitude to God and remembering Him, and are an occasion of entertainment. ‘Aishah narrates
+        that when on an Eid day her father Abu Bakr stopped young girls from singing, Muhammad said:
+        Abu Bakr! [Let them sing]; every nation has an ‘id and [this day] is our Eid.
+    </string>
 </resources>
