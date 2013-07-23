@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,7 +40,7 @@ class MessageItemPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup view, int position) {
         View imageLayout = ((Activity) context).getLayoutInflater().inflate(R.layout.message_item_details, view, false);
-        EditText messageTextView = (EditText) imageLayout.findViewById(R.id.messageTextView);
+        TextView messageTextView = (TextView) imageLayout.findViewById(R.id.messageTextView);
         messageTextView.setText(messageItemManager.getMessageString(messageItemManager.getMessageItemAt(position)));
         view.addView(imageLayout, 0);
         return imageLayout;
