@@ -8,7 +8,7 @@
     <string name="action_label_share_on_facebook">फेसबुक पर शेयर करें</string>
     <string name="action_label_share_on_twitter">ट्विटर पर शेयर करें</string>
     <string name="action_label_rate_us">रेट करें</string>
-    <string name="action_label_send_to_contacts">संपर्कों को भेजें</string>
+    <string name="action_label_share_message">Share Message</string>
     <string name="action_label_set_ringtone">रिंगटोन सेट करें</string>
     <string name="action_label_share_ringtone">रिंगटोन शेयर करें</string>
     <string name="action_label_set_wallpaper">वॉलपेपर सेट करें</string>

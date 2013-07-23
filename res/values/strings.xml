@@ -9,7 +9,7 @@
     <string name="action_label_share_on_facebook">Share on Facebook</string>
     <string name="action_label_share_on_twitter">Share on Twitter</string>
     <string name="action_label_rate_us">Rate us</string>
-    <string name="action_label_send_to_contacts">Send to contacts</string>
+    <string name="action_label_share_message">Share Message</string>
     <string name="action_label_set_ringtone">Set Ringtone</string>
     <string name="action_label_share_ringtone">Share Ringtone</string>
     <string name="action_label_set_wallpaper">Set Wallpaper</string>

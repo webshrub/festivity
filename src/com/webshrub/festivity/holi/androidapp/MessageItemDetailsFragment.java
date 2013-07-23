@@ -1,12 +1,10 @@
 package com.webshrub.festivity.holi.androidapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -20,12 +18,14 @@ import com.viewpagerindicator.UnderlinePageIndicator;
  * Time: 2:40 PM
  */
 public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<MessageItem> {
+    private MessageItemManager messageItemManager;
     private ViewPager viewPager;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
+        messageItemManager = new MessageItemManager(getSherlockActivity());
         int pagerPosition = ((MessageItem) getSherlockActivity().getIntent().getExtras().getParcelable(FestivityConstants.FESTIVITY_ITEM)).getId();
         viewPager.setCurrentItem(pagerPosition);
     }
@@ -39,11 +39,10 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_send_to_contacts:
-                EditText messageTextView = (EditText) viewPager.findViewById(R.id.messageTextView);
-                Intent contactPickerIntent = new Intent(getActivity(), ContactPickerActivity.class);
-                contactPickerIntent.putExtra(FestivityConstants.MESSAGE_TEXT, messageTextView.getText().toString());
-                startActivity(contactPickerIntent);
+            case R.id.menu_share_message:
+                int currentPosition = viewPager.getCurrentItem();
+                MessageItem currentMessageItem = messageItemManager.getMessageItemAt(currentPosition);
+                FestivityUtility.shareFestivityItem(getSherlockActivity(), currentMessageItem);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
