@@ -1,5 +1,6 @@
 package com.webshrub.festivity.holi.androidapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -42,7 +43,11 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
             case R.id.menu_share_message:
                 int currentPosition = viewPager.getCurrentItem();
                 MessageItem currentMessageItem = messageItemManager.getMessageItemAt(currentPosition);
-                FestivityUtility.shareFestivityItem(getSherlockActivity(), currentMessageItem);
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, currentMessageItem.getName());
+                shareIntent.putExtra(Intent.EXTRA_TEXT, messageItemManager.getMessageString(currentMessageItem));
+                startActivity(shareIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
