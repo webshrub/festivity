@@ -1,4 +1,4 @@
-package com.webshrub.festivity.eid.androidapp;
+package com.webshrub.greetings.eid.androidapp;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;

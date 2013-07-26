@@ -1,4 +1,4 @@
-package com.webshrub.festivity.eid.androidapp;
+package com.webshrub.greetings.eid.androidapp;
 
 import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;

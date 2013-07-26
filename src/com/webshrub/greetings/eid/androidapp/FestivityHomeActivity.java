@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webshrub.festivity.eid.androidapp;
+package com.webshrub.greetings.eid.androidapp;
 
 import android.content.Context;
 import android.content.Intent;
@@ -187,7 +187,7 @@ public class FestivityHomeActivity extends SherlockFragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_rate_us:
-                String marketUrl = "market://details?id=com.webshrub.festivity.eid.androidapp";
+                String marketUrl = "market://details?id=com.webshrub.greetings.eid.androidapp";
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(marketUrl)));
                 return true;
             case R.id.menu_share_on_facebook:

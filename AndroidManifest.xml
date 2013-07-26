@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.webshrub.festivity.eid.androidapp"
+          package="com.webshrub.greetings.eid.androidapp"
           android:versionCode="1"
           android:versionName="1.0">
 
@@ -61,8 +61,8 @@
                 android:screenOrientation="portrait"/>
 
         <provider
-                android:name="com.webshrub.festivity.eid.androidapp.FestivityContentProvider"
-                android:authorities="com.webshrub.festivity.eid.androidapp"/>
+                android:name=".FestivityContentProvider"
+                android:authorities="com.webshrub.greetings.eid.androidapp"/>
         <activity
                 android:name="com.google.ads.AdActivity"
                 android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>

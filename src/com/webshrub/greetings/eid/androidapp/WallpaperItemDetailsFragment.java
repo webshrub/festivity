@@ -1,11 +1,11 @@
-package com.webshrub.festivity.eid.androidapp;
+package com.webshrub.greetings.eid.androidapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -18,36 +18,38 @@ import com.viewpagerindicator.UnderlinePageIndicator;
  * Date: 3/7/13
  * Time: 2:40 PM
  */
-public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<MessageItem> {
-    private MessageItemManager messageItemManager;
+public class WallpaperItemDetailsFragment extends FestivityItemDetailsFragment<WallpaperItem> {
+    private WallpaperItemManager wallpaperItemManager;
     private ViewPager viewPager;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        messageItemManager = new MessageItemManager(getSherlockActivity());
-        int pagerPosition = ((MessageItem) getSherlockActivity().getIntent().getExtras().getParcelable(FestivityConstants.FESTIVITY_ITEM)).getId();
+        wallpaperItemManager = new WallpaperItemManager(getSherlockActivity());
+        int pagerPosition = ((WallpaperItem) getSherlockActivity().getIntent().getExtras().getParcelable(FestivityConstants.FESTIVITY_ITEM)).getId();
         viewPager.setCurrentItem(pagerPosition);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_message, menu);
+        inflater.inflate(R.menu.menu_wallpaper, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_share_message:
+            case R.id.menu_set_wallpaper:
                 int currentPosition = viewPager.getCurrentItem();
-                MessageItem currentMessageItem = messageItemManager.getMessageItemAt(currentPosition);
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_SUBJECT, currentMessageItem.getName());
-                shareIntent.putExtra(Intent.EXTRA_TEXT, messageItemManager.getMessageString(currentMessageItem));
-                startActivity(shareIntent);
+                WallpaperItem currentWallpaperItem = wallpaperItemManager.getWallpaperItemAt(currentPosition);
+                wallpaperItemManager.setWallpaper(currentWallpaperItem);
+                Toast.makeText(getSherlockActivity(), R.string.toast_wallpaper_set_successfully, Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_share_wallpaper:
+                currentPosition = viewPager.getCurrentItem();
+                currentWallpaperItem = wallpaperItemManager.getWallpaperItemAt(currentPosition);
+                FestivityUtility.shareFestivityItem(getSherlockActivity(), currentWallpaperItem);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -56,9 +58,10 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.festivity_item_details_pager, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.pager);
-        viewPager.setAdapter(new MessageItemPagerAdapter(getSherlockActivity()));
+        viewPager.setAdapter(new WallpaperItemPagerAdapter(getSherlockActivity()));
         UnderlinePageIndicator pageIndicator = (UnderlinePageIndicator) view.findViewById(R.id.pageIndicator);
         pageIndicator.setViewPager(viewPager);
         pageIndicator.setFades(false);

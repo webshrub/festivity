@@ -1,4 +1,4 @@
-package com.webshrub.festivity.eid.androidapp;
+package com.webshrub.greetings.eid.androidapp;
 
 /**
  * Created by IntelliJ IDEA.
@@ -7,7 +7,6 @@ package com.webshrub.festivity.eid.androidapp;
  * Time: 3:08 PM
  */
 public class FestivityConstants {
-    public static final String MESSAGE_TEXT = "messageText";
     public static final String FESTIVITY_ITEM = "FESTIVITY_ITEM";
     public static final String RINGTONE_ASSETS_DIR = "ringtone";
     public static final String RINGTONE_STORAGE_DIR = "festivity/ringtone";
@@ -15,5 +14,5 @@ public class FestivityConstants {
     public static final String WALLPAPER_STORAGE_DIR = "festivity/wallpaper";
     public static final String MESSAGE_ASSETS_DIR = "message";
     public static final boolean DEVELOPER_MODE = false;
-    public static final String FESTIVITY_CONTENT_PROVIDER_AUTHORITY = "content://com.webshrub.festivity.eid.androidapp/";
+    public static final String FESTIVITY_CONTENT_PROVIDER_AUTHORITY = "content://com.webshrub.greetings.eid.androidapp/";
 }
