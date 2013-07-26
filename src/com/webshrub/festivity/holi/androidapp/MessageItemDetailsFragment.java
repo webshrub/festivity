@@ -34,7 +34,7 @@ public class MessageItemDetailsFragment extends FestivityItemDetailsFragment<Mes
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_sms, menu);
+        inflater.inflate(R.menu.menu_message, menu);
     }
 
     @Override
