@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="appirator_app_title">Festivity</string>
-    <string name="appirator_market_url">market://details?id=com.webshrub.festivity.holi.androidapp</string>
+    <string name="appirator_app_title">Greetings - Eid</string>
+    <string name="appirator_market_url">market://details?id=com.webshrub.greetings.eid.androidapp</string>
     <integer name="appirator_days_until_prompt">0</integer>
     <integer name="appirator_launches_until_prompt">0</integer>
     <!-- Set this to 0 to remind every launch -->

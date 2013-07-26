@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="application_name">उत्सव - होली</string>
+    <string name="action_label_about">About Eid</string>
     <string name="action_label_search">खोजें</string>
     <string name="action_label_settings">सेटिंग्स</string>
     <string name="preferences">सेटिंग्स</string>
-    <string name="contact_picker">संपर्कों को चुनें</string>
     <string name="action_label_share_on_facebook">फेसबुक पर शेयर करें</string>
     <string name="action_label_share_on_twitter">ट्विटर पर शेयर करें</string>
     <string name="action_label_rate_us">रेट करें</string>
@@ -16,24 +16,30 @@
     <string name="messages">संदेश</string>
     <string name="ringtones">रिंगटोन्स</string>
     <string name="wallpapers">वॉलपेपर</string>
-    <string name="action_label_select_all">सभी को चुनें</string>
-    <string name="action_label_select_none">किसी को ना चुनें</string>
-    <string name="action_label_send">भेजें</string>
-    <string name="dialog_please_wait">कृपया प्रतीक्षा करें</string>
-    <string name="dialog_sending_message_to_selected_contacts">चुने गये संपर्कों को संदेश भेजा जा
-        रहा
-        है ..
-    </string>
-    <string name="dialog_message_sent_to_all">संदेश सभी %1$d चयनित संपर्कों को भेजा गया..</string>
-    <string name="dialog_message_sent_out_of">संदेश %1$d चयनित संपर्कों में से %2$d को भेजा गया..
-    </string>
-    <string name="no_contacts_found">कोई संपर्क नहीं मिले.</string>
-    <string name="toast_please_choose_some_contacts">कुछ संपर्कों का चयन करें.</string>
-    <string name="no_data_found.">कोई डेटा नहीं मिला.</string>
+    <string name="no_data_found">कोई संपर्क नहीं मिले.</string>
     <string name="toast_ringtone_set_successfully">रिंगटोन्स सफलतापूर्वक सेट हो गया</string>
     <string name="toast_repeat_is_OFF">रिपीट बंद है</string>
     <string name="toast_repeat_is_ON">रिपीट चालू है</string>
     <string name="toast_shuffle_is_OFF">शफल बंद है</string>
     <string name="toast_shuffle_is_ON">शफल चालू है</string>
     <string name="toast_wallpaper_set_successfully">वॉलपेपर सफलतापूर्वक सेट हो गया</string>
+    <string name="festival_content">Before the advent of Islam in Arabia, there is mention of
+        festivals as well as some others among the Arabs. The Israelites had festivals as well, but
+        as is evident from the Old Testament and other scriptures, these festivals related more to
+        commemorating certain days of their history.
+        Eid al-Fitr was originated by the Islamic prophet Muhammad. It is observed on the first of
+        the month of Shawwal at the end of the month of Ramadan, during which Muslims undergo a
+        period of fasting.
+        According to certain traditions, these festivals were initiated in Madinah after the
+        migration of Muhammad from Mecca. Anas reports:
+        When the Prophet arrived in Madinah, he found people celebrating two specific days in which
+        they used to entertain themselves with recreation and merriment. He asked them about the
+        nature of these festivities at which they replied that these days were occasions of fun and
+        recreation. At this, the Prophet remarked that the Almighty has fixed two days [of
+        festivity] instead of these for you which are better than these: Eid al-Fitr and Eid al-Adha
+        For Muslims, both the festivals of Eid al-Fitr and Eid al-Adha are occasions of showing
+        gratitude to God and remembering Him, and are an occasion of entertainment. ‘Aishah narrates
+        that when on an Eid day her father Abu Bakr stopped young girls from singing, Muhammad said:
+        Abu Bakr! [Let them sing]; every nation has an ‘id and [this day] is our Eid.
+    </string>
 </resources>
