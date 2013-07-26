@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.webshrub.festivity.holi.androidapp"
+          package="com.webshrub.festivity.eid.androidapp"
           android:versionCode="1"
           android:versionName="1.0">
 
@@ -31,7 +31,7 @@
             android:theme="@style/Theme.AndroidDevelopers">
         <activity
                 android:label="@string/application_name"
-                android:name="com.webshrub.festivity.holi.androidapp.FestivityHomeActivity"
+                android:name="com.webshrub.festivity.eid.androidapp.FestivityHomeActivity"
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait">
             <intent-filter>
@@ -43,7 +43,7 @@
         </activity>
         <activity
                 android:label="@string/preferences"
-                android:name="com.webshrub.festivity.holi.androidapp.FestivityPreferenceActivity"
+                android:name="com.webshrub.festivity.eid.androidapp.FestivityPreferenceActivity"
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait">
             <intent-filter>
@@ -53,7 +53,7 @@
         </activity>
         <activity
                 android:label="@string/application_name"
-                android:name="com.webshrub.festivity.holi.androidapp.FestivityItemDetailsActivity"
+                android:name="com.webshrub.festivity.eid.androidapp.FestivityItemDetailsActivity"
                 android:screenOrientation="portrait"/>
         <activity
                 android:label="@string/action_label_about"
@@ -61,8 +61,8 @@
                 android:screenOrientation="portrait"/>
 
         <provider
-                android:name="com.webshrub.festivity.holi.androidapp.FestivityContentProvider"
-                android:authorities="com.webshrub.festivity.holi.androidapp"/>
+                android:name="com.webshrub.festivity.eid.androidapp.FestivityContentProvider"
+                android:authorities="com.webshrub.festivity.eid.androidapp"/>
         <activity
                 android:name="com.google.ads.AdActivity"
                 android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
