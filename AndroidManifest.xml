@@ -31,7 +31,7 @@
             android:theme="@style/Theme.AndroidDevelopers">
         <activity
                 android:label="@string/application_name"
-                android:name="com.webshrub.festivity.eid.androidapp.FestivityHomeActivity"
+                android:name=".FestivityHomeActivity"
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait">
             <intent-filter>
@@ -43,7 +43,7 @@
         </activity>
         <activity
                 android:label="@string/preferences"
-                android:name="com.webshrub.festivity.eid.androidapp.FestivityPreferenceActivity"
+                android:name=".FestivityPreferenceActivity"
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait">
             <intent-filter>
@@ -53,7 +53,7 @@
         </activity>
         <activity
                 android:label="@string/application_name"
-                android:name="com.webshrub.festivity.eid.androidapp.FestivityItemDetailsActivity"
+                android:name=".FestivityItemDetailsActivity"
                 android:screenOrientation="portrait"/>
         <activity
                 android:label="@string/action_label_about"
