@@ -25,7 +25,7 @@ public class FestivityItemListFragment<T extends FestivityItem> extends Sherlock
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setEmptyText(getResources().getString(R.string.no_contacts_found));
+        setEmptyText(getResources().getString(R.string.no_data_found));
         // We have a menu item to show in action bar.
         setHasOptionsMenu(true);
         getListView().setTextFilterEnabled(true);
